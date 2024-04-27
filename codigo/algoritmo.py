@@ -17,7 +17,6 @@ def eliminar_enemigos(n,x, f):
             
     max_enemigos = enemigos_eliminados[-1]
     secuencia = obtener_secuencia_estrategias(x, f, enemigos_eliminados, n)
-    #secuencia = obtener_secuencia_estrategias_recur(x, f, enemigos_eliminados, n, n-1, [])
     secuencia.reverse()
     return (max_enemigos, secuencia)
 
@@ -52,22 +51,3 @@ def es_secuencia_correcta(x, f, cantidad_enemigos, secuencia):
         else:
             minutos_desde_ultimo_ataque += 1    
     return tropas_eliminadas == cantidad_enemigos
-
-# NO USARLA
-def obtener_secuencia_estrategias_recur(x, f, enemigos_eliminados, minuto_actual, minutos_desde_ultimo_ataque, secuencia:list):
-    if minuto_actual == 0:
-        return secuencia
-        
-    enemigos_ataque_anterior = enemigos_eliminados[minuto_actual-minutos_desde_ultimo_ataque-1]
-    enemigos_actuales = min(f[minutos_desde_ultimo_ataque], x[minuto_actual-1]) 
-    
-    if enemigos_ataque_anterior + enemigos_actuales == enemigos_eliminados[minuto_actual]:
-        secuencia.append(ATACAR)
-        minuto_actual = minuto_actual-minutos_desde_ultimo_ataque-1
-        
-        secuencia.extend([CARGAR]*minutos_desde_ultimo_ataque) 
-        
-        return obtener_secuencia_estrategias_recur(x, f, enemigos_eliminados, minuto_actual, minuto_actual-1, secuencia)
-    
-    return obtener_secuencia_estrategias_recur(x, f, enemigos_eliminados, minuto_actual, minutos_desde_ultimo_ataque-1, secuencia)
-

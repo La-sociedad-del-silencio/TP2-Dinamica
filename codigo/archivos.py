@@ -1,5 +1,5 @@
 import time
-from algoritmo_cambio import eliminar_enemigos
+from algoritmo import eliminar_enemigos
 
 def generarTestDe(archivo):
     x = []

@@ -1,4 +1,4 @@
-from algoritmo_cambio import eliminar_enemigos, es_secuencia_correcta
+from algoritmo import eliminar_enemigos, es_secuencia_correcta
 from archivos import generarTestDe
 import time
 
