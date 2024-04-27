@@ -24,9 +24,15 @@ class Resultado:
         representacion += "\n"
         representacion += "Tiempo total: " + str(self.tiempo) + " milisegundos"
         representacion += "\n"
-        representacion += "Resultado esperado: " + str(self.esperado[0])
+        representacion += "Cantidad de tropas:\n" 
+        representacion += "\tResultado esperado: " + str(self.esperado[0])
         representacion += "\n"
-        representacion += "Resultado obtenido: " + str(self.obtenido[0])
+        representacion += "\tResultado obtenido: " + str(self.obtenido[0])
+        representacion += "\n"
+        coincide_tropas_eliminadas = self.obtenido[0] == self.esperado[0]
+        secuencia_correcta = es_secuencia_correcta(self.datos[0], self.datos[1], self.obtenido[0], self.obtenido[1])
+        rta_secuencia_correcta = "validada" if secuencia_correcta else ": es incorrecta"
+        representacion += f"Generación de secuencia {rta_secuencia_correcta}" 
         representacion += "\n"
         # La cantidad de tropas eliminadas debe ser la misma, pero
         # la secuencia puede llegar a ser distinta a la de la cátedra
@@ -34,7 +40,7 @@ class Resultado:
         # Por eso, usamos la función es_secuencia_correcta() que verifica que con la
         # secuencia obtenida se llegue a la misma cantidad de tropas eliminadas,
         # es decir, que la reconstrucción de la solución sea correcta.
-        if self.obtenido[0] == self.esperado[0] and es_secuencia_correcta(self.datos[0], self.datos[1], self.obtenido[0], self.obtenido[1]):
+        if coincide_tropas_eliminadas and secuencia_correcta:
             representacion += VERDE + "Resultado: :)" + FINCO
         else:
             representacion += ROJO + "Resultado: X" + FINCO
@@ -42,17 +48,14 @@ class Resultado:
 
         return representacion
 
-def generarRtasEsperadasCatedra(archivo):
+def generarRtasEsperadas(archivo):
     """ 
     Crea un diccionario con las respuestas esperadas para los ejemplos
-    de la cátedra. 
+    que figuran en el archivo. 
     """
     rtas = {}
     
     with open(archivo, "r") as f:
-        while True:
-            if next(f) == "\n":
-                break
     
         nombre_archivo = None
         cantidad_tropas  = None
@@ -65,27 +68,22 @@ def generarRtasEsperadasCatedra(archivo):
                 nombre_archivo = linea
             elif linea.startswith('Cantidad de tropas eliminadas:'):
                 cantidad_tropas = int(linea.split(': ')[1])
+                rtas[nombre_archivo] = (cantidad_tropas, estrategias)
             elif linea.startswith('Estrategia: '):
                 estrategias = linea.split(': ')[1].split(', ')
-            else: # termina la rta de ese archivo
-                rtas[nombre_archivo] = (cantidad_tropas, estrategias)
+            
         rtas[nombre_archivo] = (cantidad_tropas, [estrategias])
 
     return rtas 
 
-def generarRtasEsperadasEjAdicionales():
-    """ 
-    Crea un diccionario con las respuestas esperadas para los ejemplos
-    adicionales.
-    """    
-    # To-Do      
-        
-def generarResultados(carpeta, rtas):
+def generarResultados(carpeta):
     """ 
     Dado un directorio con ejemplos y las respuestas esperadas, ejecuta
     el programa en cada uno de ellos y devuelve una lista con los resultados.
     obtenidos.
     """
+    archivo_rtas_esperadas = f"{carpeta}/Resultados_Esperados.txt"
+    rtas = generarRtasEsperadas(archivo_rtas_esperadas)
     resultados = []
     for archivo, rtaEsperada in rtas.items():
         

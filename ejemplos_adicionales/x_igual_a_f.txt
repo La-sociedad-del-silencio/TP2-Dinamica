@@ -1,0 +1,12 @@
+# Ejemplo con 5 elementos: valores de x iguales a los de f
+5
+50
+70
+105
+223
+861
+50
+70
+105
+223
+861

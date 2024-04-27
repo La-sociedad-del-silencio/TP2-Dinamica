@@ -1,0 +1,12 @@
+# Ejemplo de 5 elementos: comienza a atacar a la mitad del combate
+5
+109
+180
+926
+149
+877
+119
+150
+587
+520
+522

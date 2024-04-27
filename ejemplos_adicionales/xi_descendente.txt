@@ -1,0 +1,12 @@
+# Ejemplo con 5 elementos: valores de x en orden descendente
+5
+763
+426
+357
+281
+194
+571
+586
+593
+600
+603

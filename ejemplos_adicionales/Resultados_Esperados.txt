@@ -1,0 +1,29 @@
+Probamos las combinaciones posibles de secuencias y dieron estos resultados.
+
+x_mayor_a_f.txt
+Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar
+Cantidad de tropas eliminadas: 400
+
+x_menor_a_f.txt
+Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar
+Cantidad de tropas eliminadas: 600
+
+x_igual_a_f.txt
+Estrategia: Cargar, Cargar, Cargar, Cargar, Atacar
+Cantidad de tropas eliminadas: 861
+
+igual_xi_mayor_a_f0.txt
+Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar
+Cantidad de tropas eliminadas: 400
+
+igual_xi_menor_a_f0.txt
+Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar
+Cantidad de tropas eliminadas: 275
+
+xi_descendente.txt
+Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar
+Cantidad de tropas eliminadas: 1829
+
+atacar_a_la_mitad.txt
+Estrategia: Cargar, Cargar, Atacar, Atacar, Atacar, Atacar
+Cantidad de tropas eliminadas: 825
