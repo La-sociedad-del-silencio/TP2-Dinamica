@@ -27,3 +27,7 @@ Cantidad de tropas eliminadas: 1829
 atacar_a_la_mitad.txt
 Estrategia: Cargar, Cargar, Atacar, Atacar, Atacar, Atacar
 Cantidad de tropas eliminadas: 825
+
+x_menor_a_f0_volumen.txt
+Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar
+Cantidad de tropas eliminadas: 5104
