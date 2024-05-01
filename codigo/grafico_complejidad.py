@@ -50,6 +50,7 @@ def generarEjemplos(cantidadElementos):
     
     for i in range(cantidadDeCorridas):
         for j in range(len(cantidadElementos)):
+            print(f"Iteracion {j}/{len(cantidadElementos)}")
             msQueLlevo = correrTest(cantidadElementos[j])
             tmp = milisegs[j].copy()
             tmp.append(msQueLlevo)
@@ -69,15 +70,13 @@ def generarGrafico():
     '''
     # Arrancamos con la misma cantidad que la catedra
     cantidadElementos = []
-    maxNum = 100000
-    # maxNum = 10000
-    tasa = maxNum / 100
-    # tasa = 10000000
+    maxNum = 10000
     for i in range(maxNum):
-        skip = randint(1,maxNum)
-        if skip > tasa:
+        skip = randint(1, 6)
+        if skip > 2:
             continue
         cantidadElementos.append(i)
+    print(cantidadElementos)
 
     cantidadElementos, milisegs = generarEjemplos(cantidadElementos)
     print(cantidadElementos)
