@@ -22,3 +22,5 @@ formato-png: con-colores-sintaxis
 	convert   -alpha remove -alpha off -quality 100 -density 150 -sharpen 0x1.0 -verbose informe.pdf informe-imagenes/informe.png
 	./imagenes-readme.sh 
 
+correr_mediciones:
+	python3 codigo/grafico_complejidad.py
