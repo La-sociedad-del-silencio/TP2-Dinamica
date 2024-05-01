@@ -103,4 +103,12 @@ Como caso base, tenemos que en el minuto 0 se eliminan 0 enemigos.
 
 Encontrada la ecuación de recurrencia, prodecemos a aplicarla iterativamente de manera bottom up, construyendo las soluciones a los subproblemas de $i < n$ hasta llegar a la solución del problema original con $i = n$. Esta técnica es justamente programación dinámica. Empleamos \texttt{memoization} guardando los resultados calculados previamente en un arreglo. El procedimiento explicado nos permite realizar una exploración implícita del espacio de soluciones. La solución final será óptima porque en el minuto \texttt{n} elegimos haber atacado hace \texttt{j} minutos, donde \texttt{j} maximiza la ecuación de recurrencia.
 
+\section{Mediciones de tiempo}
+\label{sec:medTiempo}
+Para corroborar la complejidad algorítmica de nuestra implementación, realizamos una serie de tests de volumen. A diferencia del \href{https://github.com/La-sociedad-del-silencio/TP1-Greedy}{TP1} y debido a la complejidad temporal del algorimto; realizamos tests con una menor cantidad de casos.
+Realizamos al rededor de ~3500 tests, con $n$ entre 1 y 10000, para poder graficar y analizar el comportamiento de la implementacion. El codigo que usamos para generar los tests se encuentran en el archivo \texttt{codigo/grafico\_complejidad.py}.
+
+Obtuvimos los siguientes resultados:
+% \includegraphics[scale=0.69]{miliSegsFuncCantidadNativo.png}
+
 \end{document}
