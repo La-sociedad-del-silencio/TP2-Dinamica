@@ -304,6 +304,7 @@ TSWLatexianTemp*
 
 # Esto va por el uso del tmp.tex
 *.tmp.tex
+*.tmp.sh
 
 # Esto pal maldito Python!
 # Fuente: https://github.com/github/gitignore/blob/main/Python.gitignore
