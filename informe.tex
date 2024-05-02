@@ -142,7 +142,7 @@ La reconstrucción de la secuencia estratégica empieza desde el ultimo minuto, 
 Vemos que en la linea \texttt{26} comienza un ciclo while, el cual tiene dentro un ciclo for.
 Dentro del for todas las operaciones son de complejidad $\mathcal{O}(1)$, siendo todas simples operaciones.
 
-En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos for que iteran desde 0 hasta $\texttt{n}$.(esto va a suceder en la primera iteracion del algoritmo). Por esto, decimos que la reconstruccion va a tener una complejidad de $\mathcal{O}(n^2)$.
+En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos for que iteran desde 0 hasta $\texttt{n}$.(esto va a suceder en la primera iteración del algoritmo). Por esto, decimos que la reconstrucción va a tener una complejidad de $\mathcal{O}(n^2)$.
 
 \subsection{Efecto de las variables sobre el algoritmos}
 
@@ -154,6 +154,14 @@ Realizamos al rededor de ~3500 tests, con $n$ entre 1 y 10000, para poder grafic
 Obtuvimos los siguientes resultados:
 
 \includegraphics[scale=0.69]{miliSegsFuncCantidadNativo.png}
+
+Observando el gráfico podemos entender mejor el comportamiento de nuestra implementación.
+
+Podemos ver que el gráfico tiene una forma cuasi parabolica, lo cual refleja el comportamiento cuadratico del algoritmo.
+
+Además, podemos ver el rápido crecimiento que toman los valores. Por ejemplo, 2000 batallas tardan alrededor de ~500 milisegundos y que con 4000 batallas el algoritmo tarda alrededor de ~2000 milisegundos. Vemos que al duplicar el tamaño de la entrada, el tiempo que tarda no se duplica; sino que se cuadruplica.
+
+Con esto concluimos que a medida que aumenta el tamaño de entrada n (cantidad de batallas), el tiempo de ejecución del algoritmo crece a un ritmo cuadrático. Ésto coincide con el análisis de complejidad previamente presentado, indicando un costo proporcional a $n^2$.
 
 
 
