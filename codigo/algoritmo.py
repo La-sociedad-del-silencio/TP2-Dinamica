@@ -8,7 +8,8 @@ def eliminar_enemigos(n,x, f):
         max_enemigos_eliminables = min(f[0], x[minuto_actual-1]) 
         for minutos_desde_ultimo_ataque in range(minuto_actual):
             enemigos_actuales = min(f[minutos_desde_ultimo_ataque], x[minuto_actual-1]) 
-            enemigos_ataque_anterior = enemigos_eliminados[minuto_actual-minutos_desde_ultimo_ataque-1]
+            offset = minuto_actual-minutos_desde_ultimo_ataque-1
+            enemigos_ataque_anterior = enemigos_eliminados[offset]
 
             if enemigos_ataque_anterior + enemigos_actuales > max_enemigos_eliminables:
                 max_enemigos_eliminables = enemigos_ataque_anterior + enemigos_actuales
