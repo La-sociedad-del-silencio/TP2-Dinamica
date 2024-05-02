@@ -23,14 +23,13 @@ def main():
         
     else:
         print("---Ejemplos de la cátedra---\n")
-        archivo_rtas_esperadas = "ejemplos_catedra/Resultados_Esperados.txt"
-        for resultado in generarResultados("ejemplos_catedra", generarRtasEsperadasCatedra(archivo_rtas_esperadas)):
+        for resultado in generarResultados("ejemplos_catedra"):
             print(resultado)
         
-        # To-Do   
-        """ print("---Ejemplos adicionales---\n")
-        for resultado in generarResultados("ejemplos_adicionales", generarRtasEsperadasEjAdicionales()):
-            print(resultado) """
+        
+        print("---Ejemplos adicionales---\n")
+        for resultado in generarResultados("ejemplos_adicionales"):
+            print(resultado)
 
 
 main()

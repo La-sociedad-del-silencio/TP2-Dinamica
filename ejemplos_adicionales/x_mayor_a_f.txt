@@ -1,0 +1,12 @@
+# Ejemplo con 5 elementos: el valor de x es siempre mayor que f
+5
+100
+120
+140
+160
+180
+80
+100
+120
+140
+160

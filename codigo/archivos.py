@@ -1,19 +1,24 @@
 import time
-from algoritmo_cambio import eliminar_enemigos
+from algoritmo import eliminar_enemigos
 
 def generarTestDe(archivo):
     x = []
     f = []
     with open(archivo, "r") as file:
-        next(file)
-        n = int(next(file))
+        n = None
         elem_actual = 1
-        for line in file:
+        for i, line in enumerate(file):
+            line = line.strip()
+            if line.startswith("#"):
+                continue
+            if not n:
+                n = int(line)
+                continue
             if elem_actual <= n:
-                x.append(int(line.strip()))
+                x.append(int(line))
                 elem_actual += 1
             else:
-                f.append(int(line.strip()))
+                f.append(int(line))
 
     return n, x, f 
 
@@ -31,8 +36,6 @@ def procesar_archivo(argv):
 
     tiempoQueLlevo = int((fin - inicio) * 1000)
 
-    # Seccion de stdout: TO-DO
-    
-        
+    # Seccion de stdout: TO-DO        
         
         
