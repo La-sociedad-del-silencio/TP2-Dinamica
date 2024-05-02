@@ -29,10 +29,15 @@ def obtener_secuencia_estrategias(x, f, enemigos_eliminados, minuto_actual):
         
         for minutos_desde_ultimo_ataque in range(minuto_actual):
             
-            enemigos_ataque_anterior = enemigos_eliminados[minuto_actual-minutos_desde_ultimo_ataque-1]
-            enemigos_actuales = min(f[minutos_desde_ultimo_ataque], x[minuto_actual-1])  
+            offsetMins = minuto_actual-minutos_desde_ultimo_ataque-1
+            enemigos_ataque_anterior = enemigos_eliminados[offsetMins]
 
-            if enemigos_ataque_anterior + enemigos_actuales == enemigos_eliminados[minuto_actual]:
+            cantReales = min(f[minutos_desde_ultimo_ataque], x[minuto_actual-1])  
+            enemigos_actuales = cantReales
+
+            enemigosDerrotados = enemigos_ataque_anterior + enemigos_actuales 
+            esIgual = enemigosDerrotados == enemigos_eliminados[minuto_actual]
+            if esIgual:
                 minuto_actual = minuto_actual-minutos_desde_ultimo_ataque-1
                 break
             else:

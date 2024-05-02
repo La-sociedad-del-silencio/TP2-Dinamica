@@ -137,6 +137,13 @@ Es decir que el algoritmo dinámico tiene una complejidad $\mathcal{O}(n^2)$.
 \subsection{Complejidad reconstrucción}
 \label{sec:reconstruccion}
 
+\funcionArchivo{codigo/algoritmo.py obtener_secuencia_estrategias}
+La reconstrucción de la secuencia estratégica empieza desde el ultimo minuto, hasta 0.
+Vemos que en la linea \texttt{26} comienza un ciclo while, el cual tiene dentro un ciclo for.
+Dentro del for todas las operaciones son de complejidad $\mathcal{O}(1)$, siendo todas simples operaciones.
+
+En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos for que iteran desde 0 hasta $\texttt{n}$.(esto va a suceder en la primera iteracion del algoritmo). Por esto, decimos que la reconstruccion va a tener una complejidad de $\mathcal{O}(n^2)$.
+
 \subsection{Efecto de las variables sobre el algoritmos}
 
 \section{Mediciones de tiempo}
