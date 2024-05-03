@@ -6,17 +6,13 @@ from algoritmo import eliminar_enemigos
 import matplotlib.pyplot as plt
 
 def generarAtaques(n: int):
-    """ 
-    Genera la cantidad deseada de ataques de la forma (n, [x_i], [f_i])
-    utilizando números positivos aleatorios.
-    """
     rafagas = [] 
     cargaAtaque = []
-    for i in range(n):
+    for _ in range(n):
         x_i = randint(1, 1000) 
         rafagas.append(x_i)
-        f_i = randint(1, 3000) 
-        cargaAtaque.append(f_i)
+        f_j = randint(1, 1000) if len(cargaAtaque) == 0 else randint(cargaAtaque[-1]+1, cargaAtaque[-1]+100)
+        cargaAtaque.append(f_j)
 
     cargaAtaque.sort()
 
@@ -26,10 +22,6 @@ def generarAtaques(n: int):
 
         
 def correrTest(cantidad):
-    """ 
-    Genera batallas y ejecuta el algoritmo greedy sobre las mismas.
-    Devuelve el tiempo de ejecución en milisegundos
-    """
     n, x, f = generarAtaques(cantidad)
     inicio = time.time()
     # A priori solo nos interesa el tiempo en esta seccion 
@@ -45,54 +37,65 @@ def generarEjemplos(cantidadElementos):
     """ Ejecuta tests de volumen """
 
     milisegs = [[]] * len(cantidadElementos)
-
-    cantidadDeCorridas = 1
     
-    for i in range(cantidadDeCorridas):
-        for j in range(len(cantidadElementos)):
-            print(f"Iteracion {j}/{len(cantidadElementos)}")
-            msQueLlevo = correrTest(cantidadElementos[j])
-            tmp = milisegs[j].copy()
-            tmp.append(msQueLlevo)
-            milisegs[j] = tmp
+    for j in range(len(cantidadElementos)):
+        print(f"Iteracion {j}/{len(cantidadElementos)}")
+        msQueLlevo = correrTest(cantidadElementos[j])
+        milisegs[j] = msQueLlevo                
 
-    milisegsPromedio = [0.0] * len(cantidadElementos)
-    for i in range(len(cantidadElementos)):
-        milisegsPromedio[i] = sum(milisegs[i]) / cantidadDeCorridas
-                
-
-    return cantidadElementos, milisegsPromedio
-
-def generarGrafico():
-    '''
-    Genera un gráfico de cantidadBatallas-tiempoEjecución.
-    WARNING ESTO TARDA ~5mins
-    '''
-    # Arrancamos con la misma cantidad que la catedra
+    return milisegs
+    
+# Ejecutar si se quiere generar un nuevo conjunto de mediciones
+def generarGraficoPrimeraVez():
+    # Arrancamos con la misma cantidad que la catedra: 5000
     cantidadElementos = []
-    maxNum = 10000
-    for i in range(maxNum):
-        skip = randint(1, 6)
-        if skip > 2:
-            continue
+    maxNum = 5000
+    for i in range(0, maxNum+1, 10): 
         cantidadElementos.append(i)
-    print(cantidadElementos)
 
-    cantidadElementos, milisegs = generarEjemplos(cantidadElementos)
+    milisegs = generarEjemplos(cantidadElementos)
     print(cantidadElementos)
     print(milisegs)
+    
+    with open("ejemplos_adicionales/grafico_complejidad_datos.txt", "w") as file:
+        file.write(f"{cantidadElementos}\n{milisegs}")
 
-    # Lo hago string para que quede parejito uno al lado del otro
-    cantidadElementosString = []
-    for cantidad in cantidadElementos:
-        cantidadElementosString.append(str(cantidad))
+    generarGraficoAuxiliar(cantidadElementos, milisegs, False)
 
+#generarGraficoPrimeraVez()
+
+# Una vez que se tengan las mediciones, pero se quiera hacer cambios al gráfico,
+# ejecutar ésta así ahorramos tiempo.
+def generarGrafico():
+    cantidadElementos = None
+    milisegs = None
+    
+    with open("ejemplos_adicionales/grafico_complejidad_datos.txt", "r") as file:
+        for i, line in enumerate(file):
+            if i == 0:
+                cantidadElementos = line.strip()[1:-1].split(', ')
+            else:
+                milisegs = line.strip()[1:-1].split(', ')
+    for i in range(len(cantidadElementos)):
+        cantidadElementos[i] = int(cantidadElementos[i])
+        milisegs[i] = int(milisegs[i])
+        
+    print(milisegs[100])
+    print(milisegs[200])
+    
+    generarGraficoAuxiliar(cantidadElementos, milisegs, True)
+   
+def generarGraficoAuxiliar(cantidadElementos, milisegs, agregarTicks): 
     plt.plot(cantidadElementos, milisegs, 'o', color='red')
 
     plt.ylabel('Tiempo en mili-segundos')
-    plt.xlabel('Cantidad de batallas')
-
-    plt.savefig('images/miliSegsFuncCantidadNativo.png', format="png")
+    plt.xlabel('Cantidad de minutos del ataque')
+    if agregarTicks:
+        # cambiar según el tamaño del conjunto de datos y/o los tiempos de ejecución
+        plt.xticks([500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000])
+        plt.yticks([500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000])
+    
+    plt.savefig('images/graficoComplejidad.png', format="png")
     plt.show()
-
-generarGrafico()
+    
+#generarGrafico()
