@@ -5,7 +5,7 @@
 \usepackage{minted}            % Para poner codigo y que quede con sintaxis fachera
 \usepackage{hyperref}          % Para meter hipervinculos
 \usepackage[dvipsnames]{xcolor}% Para usar colores
-\usepackage{hhline}            % Mas configuracion para las lineas en tablas
+\usepackage{hhline}            % Mas configuracion para las líneas en tablas
 \usepackage{amsmath}           % Agregado para tags de ecuaciones
 \usepackage{xcolor}            % Coloreado de ecuaciones
 \usepackage{quoting, xparse}   % Usado para citar
@@ -116,52 +116,54 @@ Antes de comenzar el algoritmo, tenemos que generar las listas de elementos sobr
 Para esto tenemos la siguiente porción de código:
 \funcionArchivo{codigo/archivos.py generarTestDe}
 
-La función lee la linea que contiene la cantidad de valores que van a tener ambas listas. Una vez hecho eso, lee $n$ lineas para almacenar los distintos valores de $x_i$ y luego lee otras $n$ lineas para tener los valores de $f(i)$.
+La función lee la línea que contiene la cantidad de valores que van a tener ambas listas. Una vez hecho eso, lee $n$ líneas para almacenar los distintos valores de $x_i$ y luego lee otras $n$ líneas para tener los valores de $f(j)$. Ésto tiene una complejidad temporal $O(2\cdot n)$ que, despreciando la constante, resulta $O(n)$.
 
 \subsection{Complejidad algoritmo}
 \funcionArchivo{codigo/algoritmo.py eliminar_enemigos}
-El algoritmo empieza creando una lista de tamaño $n + 1$; lo cual, según la \docuPy, lleva $\mathcal{O}(n)$ ya que se realiza $n$ veces una operación de tiempo $\mathcal{O}(1)$.
+El algoritmo empieza creando una lista de tamaño $n + 1$. Según la \docuPy, ésto conlleva $\mathcal{O}(n)$ ya que se realiza $n$ veces una operación de tiempo constante $\mathcal{O}(1)$.
 
-Luego, en la linea \texttt{7} comienza un ciclo for que recorre todos los valores de $n$; todo este ciclo tiene una complejidad $\mathcal{O}(n)$.
+Luego, en la línea \texttt{7} comienza un ciclo \texttt{for} que recorre todos los valores de $n$. En la línea \texttt{9} comienza un nuevo ciclo \texttt{for}, el cual va desde 0 hasta el minuto actual $i$. Esto significa que, en el peor de los casos, este ciclo va a iterar hasta $n$. Dentro del ciclo, todas las operaciones son $\mathcal{O}(1)$, es decir, constantes.
 
-Luego en la linea \texttt{9} comienza un nuevo ciclo for, el cual va desde 0 hasta el valor actual de $n$. Esto significa que, en el peor de los casos, este ciclo va a iterar hasta $n$. Dentro del ciclo, todas las operaciones son $\mathcal{O}(1)$.
+Al tener dos ciclos anidados que realiza la cantidad de iteraciones mencionadas, podemos afirmar que la complejidad algorítmica de las líneas \texttt{7} a \texttt{17} es $\mathcal{O}(n^2)$.
 
-Esto significa que la complejidad algorítmica de las lineas \texttt{7} a \texttt{17} es $\mathcal{O}(n^2)$.
+Luego, en la línea \texttt{20} se ejecuta la función \texttt{obtener\_secuencia\_estrategias}, la cual analizamos en \nameref{sec:reconstruccion}. Sin embargo, podemos adelantar que su complejidad será también cuadrática.
 
-Luego, en la linea \texttt{20} se ejecuta la funcion \texttt{obtener\_secuencia\_estrategias}, la cual analizamos en \nameref{sec:reconstruccion}.
+Finalmente, en la línea \texttt{21} se ejecuta el método \texttt{reverse()}, el cual tiene complejidad $\mathcal{O}(n)$
 
-Finalmente, en la linea \texttt{21} se ejecuta el método \texttt{reverse()}, el cual tiene complejidad $\mathcal{O}(n)$
+Es decir, que el algoritmo de programación dinámica tiene una complejidad 
+$$
+\mathcal{T}(n) = 2 \cdot \mathcal{O}(n^2) + \mathcal{O}(n) = \mathcal{O}(n^2)
+$$
 
-Es decir que el algoritmo dinámico tiene una complejidad $\mathcal{O}(n^2)$.
 
-\subsection{Complejidad reconstrucción}
+\subsection{Complejidad reconstrucción de la solución}
 \label{sec:reconstruccion}
 
 \funcionArchivo{codigo/algoritmo.py obtener_secuencia_estrategias}
-La reconstrucción de la secuencia estratégica empieza desde el ultimo minuto, hasta 0.
-Vemos que en la linea \texttt{26} comienza un ciclo while, el cual tiene dentro un ciclo for.
-Dentro del for todas las operaciones son de complejidad $\mathcal{O}(1)$, siendo todas simples operaciones.
+La reconstrucción de la secuencia estratégica empieza desde el último minuto, hasta 0.
+Vemos que en la línea \texttt{26} tenemos un ciclo \texttt{while}, el cual tiene dentro un ciclo \texttt{for}.
+Dentro del \texttt{for} todas las operaciones son de complejidad $\mathcal{O}(1)$.
 
-En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos for que iteran desde 0 hasta $\texttt{n}$.(esto va a suceder en la primera iteración del algoritmo). Por esto, decimos que la reconstrucción va a tener una complejidad de $\mathcal{O}(n^2)$.
+En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos anidados que iteran desde 0 hasta $\texttt{n}$. Por ésto, decimos que la reconstrucción va a tener una complejidad de $\mathcal{O}(n^2)$.
 
 \subsection{Efecto de las variables sobre el algoritmos}
-
+\textcolor{blue}{TO-DO}
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
-Para corroborar la complejidad algorítmica de nuestra implementación, realizamos una serie de tests de volumen. A diferencia del \href{https://github.com/La-sociedad-del-silencio/TP1-Greedy}{TP1} y debido a la complejidad temporal del algoritmo; realizamos tests con una menor cantidad de casos.
-Realizamos al rededor de ~3500 tests, con $n$ entre 1 y 10000, para poder graficar y analizar el comportamiento de la implementación. El código que usamos para generar los tests se encuentran en el archivo \texttt{codigo/grafico\_complejidad.py}.
+Para corroborar la complejidad algorítmica de nuestra implementación, realizamos una serie de tests de volumen. A diferencia del \href{https://github.com/La-sociedad-del-silencio/TP1-Greedy}{TP1} y debido a la complejidad temporal del algoritmo, realizamos tests con una menor cantidad de casos.
+Realizamos alrededor de 500 tests, con $n$ entre 0 y 5000, para poder graficar y analizar el comportamiento de la implementación. El código que usamos para generar los tests se encuentran en el archivo \texttt{codigo/grafico\_complejidad.py}. Empleamos la biblioteca random para generar valores aleatorios de $x$ y $f$.
 
 Obtuvimos los siguientes resultados:
 
-\includegraphics[scale=0.69]{miliSegsFuncCantidadNativo.png}
+\includegraphics[scale=0.69]{graficoComplejidad.png}
 
-Observando el gráfico podemos entender mejor el comportamiento de nuestra implementación.
+Observando el gráfico podemos entender mejor el comportamiento de nuestra implementación. 
 
-Podemos ver que el gráfico tiene una forma cuasi parabolica, lo cual refleja el comportamiento cuadratico del algoritmo.
+Podemos ver que el gráfico tiene una forma cuasi parabólica, lo cual refleja el comportamiento cuadrático del algoritmo.
 
-Además, podemos ver el rápido crecimiento que toman los valores. Por ejemplo, 2000 batallas tardan alrededor de ~500 milisegundos y que con 4000 batallas el algoritmo tarda alrededor de ~2000 milisegundos. Vemos que al duplicar el tamaño de la entrada, el tiempo que tarda no se duplica; sino que se cuadruplica.
+Además, podemos ver el rápido crecimiento que toman los valores. Por ejemplo, 1000 minutos de combate tardan alrededor de 160 milisegundos y con $n = 2000$ el algoritmo tarda más de 600 milisegundos. Vemos que al duplicar el tamaño de la entrada, el tiempo que tarda no se duplica, sino que se cuadruplica.
 
-Con esto concluimos que a medida que aumenta el tamaño de entrada n (cantidad de batallas), el tiempo de ejecución del algoritmo crece a un ritmo cuadrático. Ésto coincide con el análisis de complejidad previamente presentado, indicando un costo proporcional a $n^2$.
+Con esto concluimos que, a medida que aumenta el tamaño de entrada $n$ (cantidad de minutos), el tiempo de ejecución del algoritmo crece a un ritmo cuadrático. Ésto coincide con el análisis de complejidad previamente presentado, indicando un costo proporcional a $n^2$.
 
 
 
