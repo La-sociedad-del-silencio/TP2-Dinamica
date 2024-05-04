@@ -1,0 +1,12 @@
+# Ejemplo de 5 elementos: ataca solo al final
+5
+109
+180
+926
+149
+877
+105
+110
+115
+120
+526

@@ -21,12 +21,36 @@ Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar
 Cantidad de tropas eliminadas: 275
 
 xi_descendente.txt
+Estrategia: Cargar, Atacar, Cargar, Atacar, Atacar
+Cantidad de tropas eliminadas: 717
+
+xi_ascendente.txt
+Estrategia: Atacar, Atacar, Atacar, Cargar, Atacar
+Cantidad de tropas eliminadas: 1239
+
+fj_descendente.txt
 Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar
-Cantidad de tropas eliminadas: 1829
+Cantidad de tropas eliminadas: 1940
+
+fj_ascendente.txt
+Estrategia: Cargar, Cargar, Cargar, Atacar, Atacar
+Cantidad de tropas eliminadas: 490
+
+atacar_al_inicio.txt
+Estrategia: Atacar, Cargar, Atacar, Cargar, Atacar
+Cantidad de tropas eliminadas: 280
 
 atacar_a_la_mitad.txt
-Estrategia: Cargar, Cargar, Atacar, Atacar, Atacar, Atacar
+Estrategia: Cargar, Cargar, Atacar, Atacar, Atacar
 Cantidad de tropas eliminadas: 825
+
+atacar_al_final.txt
+Estrategia: Cargar, Cargar, Cargar, Cargar, Atacar
+Cantidad de tropas eliminadas: 526
+
+atacar_siempre.txt
+Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar
+Cantidad de tropas eliminadas: 50
 
 x_menor_a_f0_volumen.txt
 Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar, Atacar

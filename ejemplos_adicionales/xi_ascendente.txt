@@ -1,11 +1,11 @@
 # Ejemplo con 5 elementos: valores de x en orden descendente
 5
-563
-426
-357
-281
 194
-10
+281
+357
+426
+563
+241
 706
 598
 620
