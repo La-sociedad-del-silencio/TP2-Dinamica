@@ -22,19 +22,11 @@ Cantidad de tropas eliminadas: 275
 
 xi_descendente.txt
 Estrategia: Cargar, Atacar, Cargar, Atacar, Atacar
-Cantidad de tropas eliminadas: 717
+Cantidad de tropas eliminadas: 697
 
 xi_ascendente.txt
-Estrategia: Atacar, Atacar, Atacar, Cargar, Atacar
-Cantidad de tropas eliminadas: 1239
-
-fj_descendente.txt
-Estrategia: Atacar, Atacar, Atacar, Atacar, Atacar
-Cantidad de tropas eliminadas: 1940
-
-fj_ascendente.txt
-Estrategia: Cargar, Cargar, Cargar, Atacar, Atacar
-Cantidad de tropas eliminadas: 490
+Estrategia: Cargar, Atacar, Cargar, Cargar, Atacar
+Cantidad de tropas eliminadas: 844
 
 atacar_al_inicio.txt
 Estrategia: Atacar, Cargar, Atacar, Cargar, Atacar

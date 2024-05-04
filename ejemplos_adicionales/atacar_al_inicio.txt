@@ -1,4 +1,4 @@
-# Ejemplo de 5 elementos: primer estrtaegia es atacar
+# Ejemplo de 5 elementos: primer estrategia es atacar
 5
 80
 15
@@ -7,6 +7,6 @@
 300
 80
 100
-5
-26
-40
+105
+126
+140
