@@ -41,8 +41,8 @@ Estrategia: Atacar, Cargar, Atacar, Cargar, Atacar
 Cantidad de tropas eliminadas: 280
 
 atacar_a_la_mitad.txt
-Estrategia: Cargar, Cargar, Atacar, Atacar, Atacar
-Cantidad de tropas eliminadas: 825
+Estrategia: Cargar, Cargar, Atacar, Cargar, Atacar
+Cantidad de tropas eliminadas: 1100
 
 atacar_al_final.txt
 Estrategia: Cargar, Cargar, Cargar, Cargar, Atacar
