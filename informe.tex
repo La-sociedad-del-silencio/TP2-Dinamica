@@ -116,11 +116,11 @@ Antes de comenzar el algoritmo, tenemos que generar las listas de elementos sobr
 Para esto tenemos la siguiente porción de código:
 \funcionArchivo{codigo/archivos.py generarTestDe}
 
-La función lee la línea que contiene la cantidad de valores que van a tener ambas listas. Una vez hecho eso, lee $n$ líneas para almacenar los distintos valores de $x_i$ y luego lee otras $n$ líneas para tener los valores de $f(j)$. Ésto tiene una complejidad temporal $O(2\cdot n)$ que, despreciando la constante, resulta $O(n)$.
+La función lee la línea que contiene la cantidad de valores que van a tener ambas listas. Una vez hecho eso, lee $n$ líneas para almacenar los distintos valores de $x_i$ y luego lee otras $n$ líneas para tener los valores de $f(j)$. Esto tiene una complejidad temporal $O(2\cdot n)$ que, despreciando la constante, resulta $O(n)$.
 
 \subsection{Complejidad algoritmo}
 \funcionArchivo{codigo/algoritmo.py eliminar_enemigos}
-El algoritmo empieza creando una lista de tamaño $n + 1$. Según la \docuPy, ésto conlleva $\mathcal{O}(n)$ ya que se realiza $n$ veces una operación de tiempo constante $\mathcal{O}(1)$.
+El algoritmo empieza creando una lista de tamaño $n + 1$. Según la \docuPy, esto conlleva $\mathcal{O}(n)$ ya que se realiza $n$ veces una operación de tiempo constante $\mathcal{O}(1)$.
 
 Luego, en la línea \texttt{7} comienza un ciclo \texttt{for} que recorre todos los valores de $n$. En la línea \texttt{9} comienza un nuevo ciclo \texttt{for}, el cual va desde 0 hasta el minuto actual $i$. Esto significa que, en el peor de los casos, este ciclo va a iterar hasta $n$. Dentro del ciclo, todas las operaciones son $\mathcal{O}(1)$, es decir, constantes.
 
@@ -144,10 +144,12 @@ La reconstrucción de la secuencia estratégica empieza desde el último minuto,
 Vemos que en la línea \texttt{26} tenemos un ciclo \texttt{while}, el cual tiene dentro un ciclo \texttt{for}.
 Dentro del \texttt{for} todas las operaciones son de complejidad $\mathcal{O}(1)$.
 
-En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos anidados que iteran desde 0 hasta $\texttt{n}$. Por ésto, decimos que la reconstrucción va a tener una complejidad de $\mathcal{O}(n^2)$.
+En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos anidados que iteran desde 0 hasta $\texttt{n}$. Por esto, decimos que la reconstrucción va a tener una complejidad de $\mathcal{O}(n^2)$.
 
 \subsection{Efecto de las variables sobre el algoritmos}
-\textcolor{blue}{TO-DO}
+La cantidad de iteraciones que el algoritmo ejecuta depende unicamente de $n$. Esto quiere decir que los valores de $x_i$ y $f(i)$ no van a alterar el comportamiento del algoritmo.
+Ademas, como mencionamos anteriormente, el algoritmo siempre realiza una exploración implícita del espacio de soluciones en su totalidad. Esto implica que no hay valores de $x_i$ y $f(i)$ que hagan que la exploración termine prematuramente.
+
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
 Para corroborar la complejidad algorítmica de nuestra implementación, realizamos una serie de tests de volumen. A diferencia del \href{https://github.com/La-sociedad-del-silencio/TP1-Greedy}{TP1} y debido a la complejidad temporal del algoritmo, realizamos tests con una menor cantidad de casos.
@@ -163,7 +165,7 @@ Podemos ver que el gráfico tiene una forma cuasi parabólica, lo cual refleja e
 
 Además, podemos ver el rápido crecimiento que toman los valores. Por ejemplo, 1000 minutos de combate tardan alrededor de 160 milisegundos y con $n = 2000$ el algoritmo tarda más de 600 milisegundos. Vemos que al duplicar el tamaño de la entrada, el tiempo que tarda no se duplica, sino que se cuadruplica.
 
-Con esto concluimos que, a medida que aumenta el tamaño de entrada $n$ (cantidad de minutos), el tiempo de ejecución del algoritmo crece a un ritmo cuadrático. Ésto coincide con el análisis de complejidad previamente presentado, indicando un costo proporcional a $n^2$.
+Con esto concluimos que, a medida que aumenta el tamaño de entrada $n$ (cantidad de minutos), el tiempo de ejecución del algoritmo crece a un ritmo cuadrático. Esto coincide con el análisis de complejidad previamente presentado, indicando un costo proporcional a $n^2$.
 
 
 
