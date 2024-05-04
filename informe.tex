@@ -162,34 +162,32 @@ Además de los ejemplos brindados por la cátedra, se pensó en distintas perspe
         \item \texttt{atacar\_al\_final:} El primer ataque es al final del combate
         \item \texttt{atacar\_siempre:} No conviene nunca reservar energía, ataca siempre
     \end{itemize}
-    \item Volumen de ataques recibidos
-    \begin{itemize}
-        \item Ver cual de todos los ejemplos aplicarle volumen
-    \end{itemize}
     \item Relación numérica entre $x_i$ y $f(j)$
         \begin{itemize}
         \item \texttt{x\_menor\_a\_f:} Todos los $x_i$ son menores a todos los $f(j)$
-        \item \texttt{x\_menor\_a\_f0:} Todos los $x_i$ son menores a $f(0)$
         \item \texttt{x\_mayor\_a\_f:} Todos los $x_i$ son mayores a todos los $f(j)$
-        \item \texttt{x\_mayor\_a\_f0:} Todos los $x_i$ son mayores a $f(0)$
         \item \texttt{x\_igual\_a\_f:} Todos los $x_i$ sin iguales a todos los $f(j)$ (con $i$ == $j$)
-        \item \texttt{x\_igual\_a\_f\_siempre:} Todos los $x_i$ sin iguales a todos los $f(j)$ (para todo $i$, $j$)
+        \item \texttt{igual\_xi\_menor\_a\_f0:} Todos los $x_i$ son iguales entre sí y menores a f(0)
+        \item \texttt{igual\_xi\_mayor\_a\_f0:} Todos los $x_i$ son iguales entre sí y mayores a f(0)
     \end{itemize}
     \item Diferencia numérica entre $x_i$ y $x_{i+1}$, y $f(j)$ y $f(j+1)$
     \begin{itemize}
         \item \texttt{dif\_x\_cero:} La diferencia numérica entre cada $x_i$ es nula
         \item \texttt{dif\_x\_chica:} La diferencia numérica entre cada $x_i$ es de $10^{-i}$
         \item \texttt{dif\_x\_grande:} La diferencia numérica entre cada $x_i$ es de $10^i$
-        \item \texttt{dif\_f\_cero:} La diferencia numérica entre cada $f(j)$ es nula
         \item \texttt{dif\_f\_chica:} La diferencia numérica entre cada $f(j)$ es de $10^{-j}$
         \item \texttt{dif\_f\_grande:} La diferencia numérica entre cada $f(j)$ es de $10^j$
     \end{itemize}
-    \item Ordenamiento de $x_i$ y $f(j)$
+    \item Ordenamiento de $x_i$
     \begin{itemize}
         \item \texttt{xi\_descendente:} Los $x_i$ están ordenados de manera descendente
         \item \texttt{xi\_ascendente:} Los $x_i$ están ordenados de manera ascendente
-        \item \texttt{fj\_descendente:} Los $f(j)$ están ordenados de manera descendente
-        \item \texttt{fj\_ascendente:} Los $f(j)$ están ordenados de manera ascendente
+        
+        \textbf{Observación: }Los valores de $f(j)$ siempre estarán ordenados de manera ascendente por ser una función monótona creciente
+    \end{itemize}
+    \item Volumen de ataques recibidos
+    \begin{itemize}
+        \item \texttt{x\_menor\_a\_f\_volumen:} Todos los $x_i$ son menores a $f(0)$ pero con una muestra de 100 combates
     \end{itemize}
 \end{itemize}
 
