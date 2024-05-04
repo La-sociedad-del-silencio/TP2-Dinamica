@@ -167,17 +167,24 @@ Ademas, como mencionamos anteriormente, el algoritmo siempre realiza una explora
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
 Para corroborar la complejidad algorítmica de nuestra implementación, realizamos una serie de tests de volumen. A diferencia del \href{https://github.com/La-sociedad-del-silencio/TP1-Greedy}{TP1} y debido a la complejidad temporal del algoritmo, realizamos tests con una menor cantidad de casos.
-Realizamos alrededor de 500 tests, con $n$ entre 0 y 5000, para poder graficar y analizar el comportamiento de la implementación. El código que usamos para generar los tests se encuentran en el archivo \texttt{codigo/grafico\_complejidad.py}. Empleamos la biblioteca random para generar valores aleatorios de $x$ y $f$.
+Para poder graficar y analizar el comportamiento de la implementación, realizamos dos corridas, una con alrededor de 3500 tests con un $n$ entre  1 y 10000; y otra con alrededor 500 tests 500 tests, con $n$ entre 0 y 5000. El código que usamos para generar los tests se encuentran en el archivo \texttt{codigo/grafico\_complejidad.py}. Empleamos la biblioteca random para generar valores aleatorios de $x$ y $f$.
 
-Obtuvimos los siguientes resultados:
+Observando los gráficos podemos entender mejor el comportamiento de nuestra implementación. 
 
-\includegraphics[scale=0.69]{graficoComplejidad.png}
+Con la primera corrida de tests obtuvimos:
 
-Observando el gráfico podemos entender mejor el comportamiento de nuestra implementación. 
+\includegraphics[scale=0.69]{graficoComplejidadVintage.png}
 
 Podemos ver que el gráfico tiene una forma cuasi parabólica, lo cual refleja el comportamiento cuadrático del algoritmo.
 
-Además, podemos ver el rápido crecimiento que toman los valores. Por ejemplo, 1000 minutos de combate tardan alrededor de 160 milisegundos y con $n = 2000$ el algoritmo tarda más de 600 milisegundos. Vemos que al duplicar el tamaño de la entrada, el tiempo que tarda no se duplica, sino que se cuadruplica.
+Además, podemos ver el rápido crecimiento que toman los valores. Por ejemplo, 1000 minutos de combate tardan alrededor de 160 mili-segundos y con $n = 2000$ el algoritmo tarda más de 600 mili-segundos. Vemos que al duplicar el tamaño de la entrada, el tiempo que tarda no se duplica, sino que se cuadruplica.
+
+La segunda corrida de tests tuvo resultados análogos:
+
+\includegraphics[scale=0.69]{graficoComplejidad.png}
+
+
+Este también tiene una forma cuasi parabólica y también hay un rápido crecimiento del tiempo que le lleva al  algoritmo cuando aumentamos los valores. Con, 1000 minutos de combate tardan alrededor de 160 mili-segundos y con $n = 2000$ el algoritmo tarda más de 600 mili-segundos. Se repite el patrón que al duplicar el tamaño de la entrada, el tiempo que tarda no se duplica, sino que se cuadruplica.
 
 Con esto concluimos que, a medida que aumenta el tamaño de entrada $n$ (cantidad de minutos), el tiempo de ejecución del algoritmo crece a un ritmo cuadrático. Esto coincide con el análisis de complejidad previamente presentado, indicando un costo proporcional a $n^2$.
 
