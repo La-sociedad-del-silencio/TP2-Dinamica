@@ -99,6 +99,7 @@ Afortunadamente, las mediciones sísmicas de los Dai Li nos permitieron obtener 
 Sabiendo la duración en minutos del ataque ($n$), y los valores de $x_i$ y $f(j)$, podemos analizar el problema presentado e informarles a los Dai Li la secuencia de estrategias que les permitirá eliminar la mayor cantidad de enemigos empleando ataques de fisuras.
 
 \subsection{Análisis y ecuación de recurrencia}
+\label{sec:analisis}
 
 La resolución de un problema por medio de la programación dinámica implica reutilizar las soluciones a subproblemas más pequeños en subproblemas más grandes que los incluyan. En el contexto actual, el foco está puesto en maximizar la cantidad de enemigos eliminados dados $n$ minutos. Esta variable $n$ es crucial en el análisis del problema planteado puesto que si se tiene $k$ minutos, con $k < n$, necesariamente la cantidad de enemigos eliminados será menor o igual a la solución en el minuto $n$, siendo igual en el caso de que no lleguen más enemigos entre $k$ y $n$ minutos. De esta forma, la cantidad de minutos que tiene el ataque repercute en el resultado final del combate. Por ejemplo, si $n = 0$, se puede afirmar que la cantidad de enemigos eliminados será también 0. Entonces, nuestros subproblemas estarán dados por la cantidad máxima de enemigos que se pueden eliminar en cada minuto $i \leq n$.
 
@@ -166,7 +167,9 @@ Ademas, como mencionamos anteriormente, el algoritmo siempre realiza una explora
 
 % Cuidado, este \section es fragil. "Mirame y no me toques"
 \section{Análisis de optimalidad ante la variabilidad de $x_i$ y $f(i)$}
-Como exploramos antes bla bla bla espacio exploramos todo el espacio de soluciones bla bla bla no hay opcion sin buscar bla bla bla siempre es optimo
+Como mencionamos anteriormente, nuestra implementación hace una exploración implícita de todo el espacio de soluciones. Esto se ve reflejado tanto en el código como en la ecuación de recurrencia. Para buscar el par de valores que maximice la cantidad de enemigos derrotados, iteramos por todos los valores posibles de $f(i)$ dado un $x_i$.
+
+Esto implica que no hay valor de $x_i$ y $f(i)$ que no sea explorado por el algoritmo. Es decir, mientras que se cumplan las condiciones iniciales del problema (haya la misma cantidad de valores para $x_i$ y $f(i)$ y ademas que $f(i)$ sea monótona creciente), el algoritmo va a llegar a la solución optima.
 
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
