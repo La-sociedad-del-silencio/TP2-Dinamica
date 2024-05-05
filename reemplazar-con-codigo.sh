@@ -4,7 +4,7 @@
 #Segundo argumento, nombre funcion
 
 reemplazarConMinted() {
-    MYVAR=$(grep -n def $1  | grep -A 1 $2 | awk -F ":" ' { print $1 } ')
+    MYVAR=$(grep -n def $1  | grep -w -A 1 $2 | awk -F ":" ' { print $1 } ')
     MYVAR=($MYVAR)
 
     inicioFuncion=${MYVAR[0]}
