@@ -82,7 +82,8 @@ def generarGrafico():
         
     print(milisegs[100])
     print(milisegs[200])
-    
+    print(milisegs[400])
+        
     generarGraficoAuxiliar(cantidadElementos, milisegs, True)
    
 def generarGraficoAuxiliar(cantidadElementos, milisegs, agregarTicks): 

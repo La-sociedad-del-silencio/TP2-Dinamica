@@ -161,6 +161,8 @@ Dentro del \texttt{for} todas las operaciones son de complejidad $\mathcal{O}(1)
 En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos anidados que iteran desde 0 hasta $\texttt{n}$. Por esto, decimos que la reconstrucción va a tener una complejidad de $\mathcal{O}(n^2)$.
 
 \subsection{Efecto de las variables sobre el algoritmo}
+\label{sec:optimizacion}
+
 La complejidad obtenida es tenida en cuenta para el peor caso posible. Sin embargo, existe la posibilidad de que se ejecute en $O(n)$ si se recibe un set de datos con determinadas características.
 
 Este es el caso cuando todos los datos de $x_i$ son menores al resultado de $f[0]$ que se corresponde con un minuto de diferencia con el ataque anterior, es decir, $f(1)$. Esto se debe a que el resultado será predecible ya que se podría derrotar al 100\% de enemigos en todos los ataques sin necesidad de cargar fuerzas.
@@ -226,7 +228,7 @@ Los resultados de los ejemplos se podrán ejecutar en la terminal con los siguie
 
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
-Para corroborar la complejidad algorítmica de nuestra implementación, realizamos una serie de tests de volumen. A diferencia del \href{https://github.com/La-sociedad-del-silencio/TP1-Greedy}{TP1} y debido a la complejidad temporal del algoritmo, realizamos tests con una menor cantidad de casos.
+Para corroborar la complejidad algorítmica de nuestra implementación, realizamos una serie de tests de volumen. Éstos tienen en cuenta el algoritmo de programación dinámica, sin la optimización explicada en \nameref{sec:optimizacion}. A diferencia del \href{https://github.com/La-sociedad-del-silencio/TP1-Greedy}{TP1} y debido a la complejidad temporal del algoritmo, realizamos tests con una menor cantidad de casos.
 Para poder graficar y analizar el comportamiento de la implementación, realizamos dos corridas, una con alrededor de 3500 tests con un $n$ entre  1 y 10000; y otra con alrededor 500 tests 500 tests, con $n$ entre 0 y 5000. El código que usamos para generar los tests se encuentran en el archivo \texttt{codigo/grafico\_complejidad.py}. Empleamos la biblioteca random para generar valores aleatorios de $x$ y $f$.
 
 Observando los gráficos podemos entender mejor el comportamiento de nuestra implementación. 
@@ -237,14 +239,15 @@ Con la primera corrida de tests obtuvimos:
 
 Podemos ver que el gráfico tiene una forma cuasi parabólica, lo cual refleja el comportamiento cuadrático del algoritmo.
 
-Además, podemos ver el rápido crecimiento que toman los valores. Por ejemplo, 1000 minutos de combate tardan alrededor de 160 mili-segundos y con $n = 2000$ el algoritmo tarda más de 600 mili-segundos. Vemos que al duplicar el tamaño de la entrada, el tiempo que tarda no se duplica, sino que se cuadruplica.
+Además, podemos ver el rápido crecimiento que toman los valores. Por ejemplo, 2000 minutos de combate tardan alrededor de 500 mili-segundos y con 4000 el algoritmo tarda aproximadamente 2000 mili-segundos. Vemos que al duplicar el tamaño de la entrada, el tiempo de ejecución no se duplica, sino que se cuadruplica.
 
 La segunda corrida de tests tuvo resultados análogos:
 
 \includegraphics[scale=0.69]{graficoComplejidad.png}
 
+Al igual que el otro gráfico, este también tiene una forma parabólica. Podemos observar que con 1000 minutos de combate tarda alrededor de 160 mili-segundos y con $n = 2000$ conlleva más de 600 mili-segundos. 
 
-Este también tiene una forma cuasi parabólica y también hay un rápido crecimiento del tiempo que le lleva al  algoritmo cuando aumentamos los valores. Con, 1000 minutos de combate tardan alrededor de 160 mili-segundos y con $n = 2000$ el algoritmo tarda más de 600 mili-segundos. Se repite el patrón que al duplicar el tamaño de la entrada, el tiempo que tarda no se duplica, sino que se cuadruplica.
+Para comparar con el gráfico anterior, calculamos el tiempo de ejecución exacto para $n = 2000$ y $n = 4000$, donde $n$ es la cantidada de minutos en la que llegan enemigos de la Nación del Fuelgo. Obtuvimos 658 y 2567 mili-segundos, respectivamente, verificando que el patrón establecido se repite.
 
 Con esto concluimos que, a medida que aumenta el tamaño de entrada $n$ (cantidad de minutos), el tiempo de ejecución del algoritmo crece a un ritmo cuadrático. Esto coincide con el análisis de complejidad previamente presentado, indicando un costo proporcional a $n^2$.
 
