@@ -1,4 +1,4 @@
-from algoritmo import eliminar_enemigos, es_secuencia_correcta
+from algoritmo import eliminar_enemigos, es_secuencia_correcta, esOptimizable, eliminar_enemigos_optimizado
 from archivos import generarTestDe
 import time
 
@@ -89,7 +89,7 @@ def generarResultados(carpeta):
         
         n, x, f = generarTestDe(carpeta + "/" + archivo)
         inicio = time.time()
-        rta_obtenida = eliminar_enemigos(n, x, f)
+        rta_obtenida = eliminar_enemigos_optimizado(n, x) if esOptimizable(n, x, f) else eliminar_enemigos(n, x, f)
         fin = time.time()
         tiempoQueLlevo = int((fin - inicio) * 1000)
         resultado = Resultado(rta_obtenida, rtaEsperada, archivo, tiempoQueLlevo, [x, f])

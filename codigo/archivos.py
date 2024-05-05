@@ -1,5 +1,5 @@
 import time
-from algoritmo import eliminar_enemigos
+from algoritmo import eliminar_enemigos, esOptimizable, eliminar_enemigos_optimizado
 FLAGMOSTRARSECUENCIA = "--mostrarSecuencia"
 
 def generarTestDe(archivo):
@@ -31,7 +31,7 @@ def procesar_archivo(argv):
 
     inicio = time.time()
 
-    cantidad_enemigos, secuencia = eliminar_enemigos(n, x, f)
+    cantidad_enemigos, secuencia = eliminar_enemigos_optimizado(n, x) if esOptimizable(n, x, f) else eliminar_enemigos(n, x, f)
 
     fin = time.time()
 

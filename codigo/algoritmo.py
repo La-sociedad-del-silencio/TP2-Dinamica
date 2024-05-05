@@ -1,14 +1,27 @@
 CARGAR = "Cargar"
 ATACAR = "Atacar"
 
-def eliminar_enemigos(n,x, f):
+def esOptimizable(n, x, f):
+    for minuto_actual in range(n):
+        if x[minuto_actual] > f[0]:
+            return False
+    return True
+
+def eliminar_enemigos_optimizado(n, x):
+    enemigos_eliminados = x
+    max_enemigos = sum(enemigos_eliminados)
+    secuencia = [ATACAR] * n
+    return (max_enemigos,secuencia)
+
+def eliminar_enemigos(n,x,f):
     enemigos_eliminados = [0] * (n + 1)
     
     for minuto_actual in range(1, n + 1):
         max_enemigos_eliminables = min(f[0], x[minuto_actual-1]) 
         for minutos_desde_ultimo_ataque in range(minuto_actual):
             enemigos_actuales = min(f[minutos_desde_ultimo_ataque], x[minuto_actual-1]) 
-            enemigos_ataque_anterior = enemigos_eliminados[minuto_actual-minutos_desde_ultimo_ataque-1]
+            offset = minuto_actual-minutos_desde_ultimo_ataque-1
+            enemigos_ataque_anterior = enemigos_eliminados[offset]
 
             if enemigos_ataque_anterior + enemigos_actuales > max_enemigos_eliminables:
                 max_enemigos_eliminables = enemigos_ataque_anterior + enemigos_actuales
@@ -28,10 +41,15 @@ def obtener_secuencia_estrategias(x, f, enemigos_eliminados, minuto_actual):
         
         for minutos_desde_ultimo_ataque in range(minuto_actual):
             
-            enemigos_ataque_anterior = enemigos_eliminados[minuto_actual-minutos_desde_ultimo_ataque-1]
-            enemigos_actuales = min(f[minutos_desde_ultimo_ataque], x[minuto_actual-1])  
+            offsetMins = minuto_actual-minutos_desde_ultimo_ataque-1
+            enemigos_ataque_anterior = enemigos_eliminados[offsetMins]
 
-            if enemigos_ataque_anterior + enemigos_actuales == enemigos_eliminados[minuto_actual]:
+            cantReales = min(f[minutos_desde_ultimo_ataque], x[minuto_actual-1])  
+            enemigos_actuales = cantReales
+
+            enemigosDerrotados = enemigos_ataque_anterior + enemigos_actuales 
+            esIgual = enemigosDerrotados == enemigos_eliminados[minuto_actual]
+            if esIgual:
                 minuto_actual = minuto_actual-minutos_desde_ultimo_ataque-1
                 break
             else:
