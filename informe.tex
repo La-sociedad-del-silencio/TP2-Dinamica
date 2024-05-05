@@ -165,11 +165,10 @@ En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos anida
 La cantidad de iteraciones que el algoritmo ejecuta depende unicamente de $n$. Esto quiere decir que los valores de $x_i$ y $f(i)$ no van a alterar el comportamiento del algoritmo.
 Ademas, como mencionamos anteriormente, el algoritmo siempre realiza una exploración implícita del espacio de soluciones en su totalidad. Esto implica que no hay valores de $x_i$ y $f(i)$ que hagan que la exploración termine prematuramente.
 
-% Cuidado, este \section es fragil. "Mirame y no me toques"
-\section{Análisis de optimalidad ante la variabilidad de $x_i$ y $f(i)$}
-Como mencionamos anteriormente, nuestra implementación hace una exploración implícita de todo el espacio de soluciones. Esto se ve reflejado tanto en el código como en la ecuación de recurrencia. Para buscar el par de valores que maximice la cantidad de enemigos derrotados, iteramos por todos los valores posibles de $f(i)$ dado un $x_i$.
+\section{Análisis de optimalidad ante la variabilidad de $x_i$ y $f(j)$}
+Como mencionamos anteriormente, nuestra implementación hace una exploración implícita de todo el espacio de soluciones. Esto se ve reflejado tanto en el código como en la ecuación de recurrencia. Para buscar el par de valores que maximice la cantidad de enemigos derrotados, iteramos por todos los valores posibles de $f(j)$ dado un $x_i$.
 
-Esto implica que no hay valor de $x_i$ y $f(i)$ que no sea explorado por el algoritmo. Es decir, mientras que se cumplan las condiciones iniciales del problema (haya la misma cantidad de valores para $x_i$ y $f(i)$ y ademas que $f(i)$ sea monótona creciente), el algoritmo va a llegar a la solución optima.
+Esto implica que no hay valor de $x_i$ y $f(j)$ que no sea explorado por el algoritmo. Es decir, mientras que se cumplan las condiciones iniciales del problema (haya la misma cantidad de valores para $x_i$ y $f(j)$ y además que $f(j)$ sea monótona creciente), el algoritmo va a llegar a la solución optima.
 
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
