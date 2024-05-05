@@ -160,9 +160,16 @@ Dentro del \texttt{for} todas las operaciones son de complejidad $\mathcal{O}(1)
 
 En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos anidados que iteran desde 0 hasta $\texttt{n}$. Por esto, decimos que la reconstrucción va a tener una complejidad de $\mathcal{O}(n^2)$.
 
-\subsection{Efecto de las variables sobre el algoritmos}
-La cantidad de iteraciones que el algoritmo ejecuta depende unicamente de $n$. Esto quiere decir que los valores de $x_i$ y $f(i)$ no van a alterar el comportamiento del algoritmo.
-Ademas, como mencionamos anteriormente, el algoritmo siempre realiza una exploración implícita del espacio de soluciones en su totalidad. Esto implica que no hay valores de $x_i$ y $f(i)$ que hagan que la exploración termine prematuramente.
+\subsection{Efecto de las variables sobre el algoritmo}
+La complejidad obtenida es tenida en cuenta para el peor caso posible, sin embargo, existe la posibilidad de que se ejecute en $O(n)$ si se recibe un set de datos con determinadas características.
+
+Este es el caso cuando todos los datos de $x_i$ son menores al resultado de $f(0)$. Esto se debe a que el resultado será predecible ya que se podría derrotar al 100\% de enemigos en todos los ataques sin necesidad de cargar fuerzas.
+
+El algortimo en este caso simplemente ejecutaría una operación $O(n)$ para verificar si es optimizable y con $O(n)$ suma la totalidad de enemigos derrotados.
+
+\funcionArchivo{codigo/algoritmo.py esOptimizable}
+
+\funcionArchivo{codigo/algoritmo.py eliminar_enemigos_optimizado}
 
 \section{Ejemplos de ejecución}
 Se pueden encontrar en la carpeta \texttt{ejemplos\_adicionales} del \href{https://github.com/La-sociedad-del-silencio/TP2-Dinamica}{repositorio entregado} algunos ejemplos de posibles ejecuciones creadas para corroborar la optimalidad del algoritmo planteado.
