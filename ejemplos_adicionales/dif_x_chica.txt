@@ -1,0 +1,12 @@
+# Ejemplo con 5 elementos: la diferencia entre cada xi es de 10^-i
+5
+50000000000 
+45000000000
+44550000000
+44505450000
+44500999455
+20
+150
+105
+423
+424

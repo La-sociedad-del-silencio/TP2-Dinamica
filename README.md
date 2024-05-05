@@ -30,7 +30,20 @@ Debe enviarse al corrector asignado, por mail o slack, el link al repositorio do
 La nota del trabajo práctico tendrá en cuenta tanto la presentación y calidad de lo presentado, como también el desarrollo del trabajo. No será lo mismo un trabajo realizado con lo mínimo indispensable, que uno bien presentado, analizado, y probado con diferentes volúmenes, set de datos, o estrategias de generación de sets, en el caso que corresponda.
 
 # Ejecución del programa
-
+Para ejecutar todos los casos de prueba existentes, mostrar la cantidad de enemigos eliminados obtenidos y esperados y mostrar el tiempo de ejecución de cada ejemplo:
 ```c
-
+python3 codigo/main.py
 ```
+
+Para procesar y ejecutar el caso particular almacenado en ruta_a_archivo (por ejemplo: ejemplos_catedra/100.txt) mostrando el resultado obtenido y el tiempo de ejecución implementado:
+```c
+python3 codigo/main.py ruta_a_archivo
+```
+
+Mismo caso que el anterior pero mostrando la secuencia de estrategias utilizadas:
+```c
+python3 codigo/main.py ruta_a_archivo --mostrarSecuencia
+```
+
+# Informe en pdf
+[Informe](informe.pdf)
