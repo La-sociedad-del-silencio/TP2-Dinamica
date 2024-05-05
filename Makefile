@@ -2,8 +2,12 @@
 # Si rompe mucho las guindas se puede sacar igual
 LATEX = pdflatex -synctex=1
 
-con-colores-sintaxis:
-	$(LATEX) --shell-escape informe.tex
+con-colores-sintaxis: incluir-funciones
+	$(LATEX) --shell-escape informe.tmp.tex
+	mv informe.tmp.pdf informe.pdf
+
+incluir-funciones:
+	./reemplazar-con-codigo.sh
 
 sin-colores-sintaxis:
 # Este comando super loco simplemente saca todas las apariciones del
@@ -22,3 +26,5 @@ formato-png: con-colores-sintaxis
 	convert   -alpha remove -alpha off -quality 100 -density 150 -sharpen 0x1.0 -verbose informe.pdf informe-imagenes/informe.png
 	./imagenes-readme.sh 
 
+correr_mediciones:
+	python3 codigo/grafico_complejidad.py
