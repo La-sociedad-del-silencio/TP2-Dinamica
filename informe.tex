@@ -161,11 +161,12 @@ Dentro del \texttt{for} todas las operaciones son de complejidad $\mathcal{O}(1)
 En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos anidados que iteran desde 0 hasta $\texttt{n}$. Por esto, decimos que la reconstrucción va a tener una complejidad de $\mathcal{O}(n^2)$.
 
 \subsection{Efecto de las variables sobre el algoritmo}
-La complejidad obtenida es tenida en cuenta para el peor caso posible, sin embargo, existe la posibilidad de que se ejecute en $O(n)$ si se recibe un set de datos con determinadas características.
+La complejidad obtenida es tenida en cuenta para el peor caso posible. Sin embargo, existe la posibilidad de que se ejecute en $O(n)$ si se recibe un set de datos con determinadas características.
 
-Este es el caso cuando todos los datos de $x_i$ son menores al resultado de $f(0)$. Esto se debe a que el resultado será predecible ya que se podría derrotar al 100\% de enemigos en todos los ataques sin necesidad de cargar fuerzas.
+Este es el caso cuando todos los datos de $x_i$ son menores al resultado de $f[0]$ que se corresponde con un minuto de diferencia con el ataque anterior, es decir, $f(1)$. Esto se debe a que el resultado será predecible ya que se podría derrotar al 100\% de enemigos en todos los ataques sin necesidad de cargar fuerzas.
 
-El algortimo en este caso simplemente ejecutaría una operación $O(n)$ para verificar si es optimizable y con $O(n)$ suma la totalidad de enemigos derrotados.
+La comprobación de si el conjunto de datos de entrada cumple esta condición es realizada antes de ejecutar el algoritmo propiamente dicho. Es decir, primero utilizamos la función \texttt{esOptimizable(n, x, f)} que hace la verificación en tiempo lineal. Si efectivamente cumple el requisito, \texttt{eliminar_enemigos_optimizado(n, x)} resuelve el problema planteado en tiempo $O(n)$ sumando la totalidad de enemigos y estableciendo una secuencia en la que siempre se ataca. Si bien este algoritmo no es de programación dinámica, creemos que es fundamental tenerlo en cuenta especialmente con sets de datos muy grandes donde la complejidad lineal por sobre la cuadrática puede hacer una gran diferencia en el timepo de ejecución.
+Por el contrario, si no se puede optimizar, entonces ejecutamos nuestro algoritmo de programación dinámica. En este caso realizar la comprobación no afecta la complejidad resultante, sigue siendo $O(n^2)$.
 
 \funcionArchivo{codigo/algoritmo.py esOptimizable}
 
