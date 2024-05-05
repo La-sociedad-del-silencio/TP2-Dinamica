@@ -47,3 +47,16 @@ python3 codigo/main.py ruta_a_archivo --mostrarSecuencia
 
 # Informe en pdf
 [Informe](informe.pdf)
+
+# Informe en fotos
+![foto](./informe-imagenes/informe-0.png)
+![foto](./informe-imagenes/informe-1.png)
+![foto](./informe-imagenes/informe-2.png)
+![foto](./informe-imagenes/informe-3.png)
+![foto](./informe-imagenes/informe-4.png)
+![foto](./informe-imagenes/informe-5.png)
+![foto](./informe-imagenes/informe-6.png)
+![foto](./informe-imagenes/informe-7.png)
+![foto](./informe-imagenes/informe-8.png)
+![foto](./informe-imagenes/informe-9.png)
+![foto](./informe-imagenes/informe-10.png)

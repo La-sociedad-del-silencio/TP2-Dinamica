@@ -168,7 +168,7 @@ La complejidad obtenida es tenida en cuenta para el peor caso posible. Sin embar
 
 Este es el caso cuando todos los datos de $x_i$ son menores al resultado de $f[0]$ que se corresponde con un minuto de diferencia con el ataque anterior, es decir, $f(1)$. Esto se debe a que el resultado será predecible ya que se podría derrotar al 100\% de enemigos en todos los ataques sin necesidad de cargar fuerzas.
 
-La comprobación de si el conjunto de datos de entrada cumple esta condición es realizada antes de ejecutar el algoritmo propiamente dicho. Es decir, primero utilizamos la función \texttt{esOptimizable(n, x, f)} que hace la verificación en tiempo lineal. Si efectivamente cumple el requisito, \texttt{eliminar_enemigos_optimizado(n, x)} resuelve el problema planteado en tiempo $O(n)$ sumando la totalidad de enemigos y estableciendo una secuencia en la que siempre se ataca. Si bien este algoritmo no es de programación dinámica, creemos que es fundamental tenerlo en cuenta especialmente con sets de datos muy grandes donde la complejidad lineal por sobre la cuadrática puede hacer una gran diferencia en el timepo de ejecución.
+La comprobación de si el conjunto de datos de entrada cumple esta condición es realizada antes de ejecutar el algoritmo propiamente dicho. Es decir, primero utilizamos la función \texttt{esOptimizable(n, x, f)}  que hace la verificación en tiempo lineal. Si efectivamente cumple el requisito, \texttt{eliminar\_enemigos\_optimizado(n, x)} resuelve el problema planteado en tiempo $O(n)$ sumando la totalidad de enemigos y estableciendo una secuencia en la que siempre se ataca. Si bien este algoritmo no es de programación dinámica, creemos que es fundamental tenerlo en cuenta especialmente con sets de datos muy grandes donde la complejidad lineal por sobre la cuadrática puede hacer una gran diferencia en el timepo de ejecución.
 Por el contrario, si no se puede optimizar, entonces ejecutamos nuestro algoritmo de programación dinámica. En este caso realizar la comprobación no afecta la complejidad resultante, sigue siendo $O(n^2)$.
 
 \funcionArchivo{codigo/algoritmo.py esOptimizable}
@@ -224,8 +224,6 @@ Los resultados de los ejemplos se podrán ejecutar en la terminal con los siguie
     \item \texttt{python3 codigo/main.py ejemplos\_adicionales/atacar\_al\_inicio.txt :} Si se quiere imprimir los resultados de un ejemplo particular
     \item \texttt{python3 codigo/main.py ejemplos\_adicionales/atacar\_al\_inicio.txt --mostrarSecuencia :} Si se quiere imprimir los resultados de un ejemplo particular mostrando además la secuencia de estrategias implementadas
 \end{itemize}
-
-\section{Análisis de optimalidad ante la variabilidad de $x_i$ y $f(j)$}
 
 \section{Análisis de optimalidad ante la variabilidad de $x_i$ y $f(j)$}
 Como mencionamos anteriormente, nuestra implementación hace una exploración implícita de todo el espacio de soluciones. Esto se ve reflejado tanto en el código como en la ecuación de recurrencia. Para buscar el par de valores que maximice la cantidad de enemigos derrotados, iteramos por todos los valores posibles de $f(j)$ dado un $x_i$.
