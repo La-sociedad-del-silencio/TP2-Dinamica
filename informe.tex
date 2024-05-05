@@ -160,9 +160,68 @@ Dentro del \texttt{for} todas las operaciones son de complejidad $\mathcal{O}(1)
 
 En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos anidados que iteran desde 0 hasta $\texttt{n}$. Por esto, decimos que la reconstrucción va a tener una complejidad de $\mathcal{O}(n^2)$.
 
-\subsection{Efecto de las variables sobre el algoritmos}
-La cantidad de iteraciones que el algoritmo ejecuta depende unicamente de $n$. Esto quiere decir que los valores de $x_i$ y $f(i)$ no van a alterar el comportamiento del algoritmo.
-Ademas, como mencionamos anteriormente, el algoritmo siempre realiza una exploración implícita del espacio de soluciones en su totalidad. Esto implica que no hay valores de $x_i$ y $f(i)$ que hagan que la exploración termine prematuramente.
+\subsection{Efecto de las variables sobre el algoritmo}
+La complejidad obtenida es tenida en cuenta para el peor caso posible, sin embargo, existe la posibilidad de que se ejecute en $O(n)$ si se recibe un set de datos con determinadas características.
+
+Este es el caso cuando todos los datos de $x_i$ son menores al resultado de $f(0)$. Esto se debe a que el resultado será predecible ya que se podría derrotar al 100\% de enemigos en todos los ataques sin necesidad de cargar fuerzas.
+
+El algortimo en este caso simplemente ejecutaría una operación $O(n)$ para verificar si es optimizable y con $O(n)$ suma la totalidad de enemigos derrotados.
+
+\funcionArchivo{codigo/algoritmo.py esOptimizable}
+
+\funcionArchivo{codigo/algoritmo.py eliminar_enemigos_optimizado}
+
+\section{Ejemplos de ejecución}
+Se pueden encontrar en la carpeta \texttt{ejemplos\_adicionales} del \href{https://github.com/La-sociedad-del-silencio/TP2-Dinamica}{repositorio entregado} algunos ejemplos de posibles ejecuciones creadas para corroborar la optimalidad del algoritmo planteado.
+
+Además de los ejemplos brindados por la cátedra, se pensó en distintas perspectivas que podrían \textit{comprometer} de alguna manera la solución del algoritmo. Algunos aspectos evaluados fueron:
+
+\begin{itemize}
+    \item Momento en el que realiza el primer ataque:
+    \begin{itemize}
+        \item \texttt{atacar\_al\_inicio:} El primer ataque es al inicio del combate
+        \item \texttt{atacar\_a\_la\_mitad:} El primer ataque es a la mitad del combate
+        \item \texttt{atacar\_al\_final:} El primer ataque es al final del combate
+        \item \texttt{atacar\_siempre:} No conviene nunca reservar energía, ataca siempre
+    \end{itemize}
+    \item Relación numérica entre $x_i$ y $f(j)$
+        \begin{itemize}
+        \item \texttt{x\_menor\_a\_f:} Todos los $x_i$ son menores a todos los $f(j)$
+        \item \texttt{x\_mayor\_a\_f:} Todos los $x_i$ son mayores a todos los $f(j)$
+        \item \texttt{x\_igual\_a\_f:} Todos los $x_i$ sin iguales a todos los $f(j)$ (con $i$ == $j$)
+        \item \texttt{igual\_xi\_menor\_a\_f0:} Todos los $x_i$ son iguales entre sí y menores a f(0)
+        \item \texttt{igual\_xi\_mayor\_a\_f0:} Todos los $x_i$ son iguales entre sí y mayores a f(0)
+    \end{itemize}
+    \item Diferencia numérica entre $x_i$ y $x_{i+1}$, y $f(j)$ y $f(j+1)$
+    \begin{itemize}
+        \item \texttt{dif\_x\_cero:} La diferencia numérica entre cada $x_i$ es nula
+        \item \texttt{dif\_x\_chica:} La diferencia numérica entre cada $x_i$ es de $10^{-i}$
+        \item \texttt{dif\_x\_grande:} La diferencia numérica entre cada $x_i$ es de $10^i$
+        \item \texttt{dif\_f\_chica:} La diferencia numérica entre cada $f(j)$ es de $10^{-j}$
+        \item \texttt{dif\_f\_grande:} La diferencia numérica entre cada $f(j)$ es de $10^j$
+    \end{itemize}
+    \item Ordenamiento de $x_i$
+    \begin{itemize}
+        \item \texttt{xi\_descendente:} Los $x_i$ están ordenados de manera descendente
+        \item \texttt{xi\_ascendente:} Los $x_i$ están ordenados de manera ascendente
+        
+        \textbf{Observación: }Los valores de $f(j)$ siempre estarán ordenados de manera ascendente por ser una función monótona creciente
+    \end{itemize}
+    \item Volumen de ataques recibidos
+    \begin{itemize}
+        \item \texttt{x\_menor\_a\_f\_volumen:} Todos los $x_i$ son menores a $f(0)$ pero con una muestra de 100 combates
+    \end{itemize}
+\end{itemize}
+
+Los resultados de los ejemplos se podrán ejecutar en la terminal con los siguientes comandos:
+
+\begin{itemize}
+    \item \texttt{python3 codigo/main.py:} Imprime todos los resultados de ejemplos adicionales y ejemplos de cátedra con su valor obtenido y esperado, incluyendo el tiempo de ejecución
+    \item \texttt{python3 codigo/main.py ejemplos\_adicionales/atacar\_al\_inicio.txt :} Si se quiere imprimir los resultados de un ejemplo particular
+    \item \texttt{python3 codigo/main.py ejemplos\_adicionales/atacar\_al\_inicio.txt --mostrarSecuencia :} Si se quiere imprimir los resultados de un ejemplo particular mostrando además la secuencia de estrategias implementadas
+\end{itemize}
+
+\section{Análisis de optimalidad ante la variabilidad de $x_i$ y $f(j)$}
 
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}

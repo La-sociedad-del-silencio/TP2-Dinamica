@@ -1,0 +1,12 @@
+# Ejemplo de 5 elementos: ataca siempre
+5
+10
+15
+20
+25
+30
+10
+11
+12
+40
+1000

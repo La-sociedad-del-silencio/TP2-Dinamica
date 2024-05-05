@@ -1,0 +1,12 @@
+# Ejemplo con 5 elementos: la diferencia entre cada xi es nula
+5
+50
+50
+50
+50
+50
+20
+70
+105
+423
+424

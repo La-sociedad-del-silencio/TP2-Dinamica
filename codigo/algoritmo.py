@@ -1,7 +1,19 @@
 CARGAR = "Cargar"
 ATACAR = "Atacar"
 
-def eliminar_enemigos(n,x, f):
+def esOptimizable(n, x, f):
+    for minuto_actual in range(n):
+        if x[minuto_actual] > f[0]:
+            return False
+    return True
+
+def eliminar_enemigos_optimizado(n, x):
+    enemigos_eliminados = x
+    max_enemigos = sum(enemigos_eliminados)
+    secuencia = [ATACAR] * n
+    return (max_enemigos,secuencia)
+
+def eliminar_enemigos(n,x,f):
     enemigos_eliminados = [0] * (n + 1)
     
     for minuto_actual in range(1, n + 1):
