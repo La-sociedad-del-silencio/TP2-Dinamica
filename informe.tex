@@ -175,8 +175,67 @@ Por el contrario, si no se puede optimizar, entonces ejecutamos nuestro algoritm
 
 \funcionArchivo{codigo/algoritmo.py eliminar_enemigos_optimizado}
 
+\section{Análisis de optimalidad ante la variabilidad de $x_i$ y $f(j)$}
+Para comprobar la optimalidad de nuestro algoritmo, realizamos múltiples pruebas variando los valores de $x_i$ y $f(j)$. En \nameref{sec:ejemplos} se encuentra la explicación detallada de los casos de prueba. En general usamos $n = 5$ para poder calcular de antemano el resultado óptimo esperado y posteriormente compararlo con el obtenido por nuestro algoritmo. En cada caso ambos resultados coincidieron.
+
+Como mencionamos anteriormente, nuestra implementación hace una exploración implícita de todo el espacio de soluciones. Esto se ve reflejado tanto en el código como en la ecuación de recurrencia. Para buscar el par de valores que maximice la cantidad de enemigos derrotados, iteramos por todos los valores posibles de $f(j)$ dado un $x_i$, teniendo en cuenta que $j \leq i$.
+
+Esto implica que no hay combinación de $x_i$ y $f(j)$ que no sea explorada por el algoritmo. Es decir, mientras que se cumplan las condiciones iniciales del problema (misma cantidad de valores para $x_i$ y $f(j)$), el algoritmo va a llegar a la solución óptima. Como pueden existir múltiples secuencias de estrategias que impliquen eliminar la cantidad máxima de enemigos, nuestro algoritmo solo devolverá una, dada por la función de reconstrucción de la solución.
+
+A continuación procedemos a explicar el comportamiento de nuestro algoritmo con un ejemplo sencillo. Dados los siguientes datos de entrada
+
+$n = 5$
+
+$x = [109, 180, 926, 100, 877]$
+
+$f = [119, 300, 800, 888, 889]$
+
+Queremos maximizar la cantidad de enemigos eliminados. Para ello, hacemos uso de la ecuación de recurrencia planteada anteriormente. En el minuto $i = 0$, la cantidad de enemigos eliminados es 0.
+\begin{enumerate}
+    \item minuto actual = 1 $\rightarrow$ La única opción es atacar, eliminando $min(x_1, f(1))$. Luego, $OPT[1] = 109$.
+    \item minuto actual = 2 $\rightarrow$ Tenemos 2 opciones:
+    \begin{itemize}
+        \item Atacar en el minuto 1 y en el 2 $\rightarrow OPT[1] + min(x_2, f(1)) = 109 + 119 = 228$
+        \item Cargar en el minuto 1 y atacar en el 2 $\rightarrow OPT[0] + min(x_2, f(2)) = 0 + 180 = 180$
+        \item Nos quedamos con el valor máximo $\rightarrow OPT[2] = 228$     
+    \end{itemize}
+    \item minuto actual = 3 $\rightarrow$ Además de atacar en este minuto, podemos haber atacado hace:
+    \begin{itemize}
+        \item 1 minuto $\rightarrow OPT[3-1] + min(x_3, f(1)) = 228 + 119 = 347$
+        \item 2 minutos $\rightarrow OPT[3-2] + min(x_3, f(2)) = 109 + 300 = 409$
+        \item 3 minutos $\rightarrow OPT[3-3] + min(x_3, f(3)) = 0 + 800 = 800$
+        \item Nos quedamos con el valor máximo $\rightarrow OPT[3] = 800$     
+    \end{itemize}
+    \item minuto actual = 4 $\rightarrow$ El último ataque pudo haber ocurrido hace:
+    \begin{itemize}
+        \item 1 minuto $\rightarrow OPT[4-1] + min(x_4, f(1)) = 800 + 100 = 900$
+        \item 2 minutos $\rightarrow OPT[4-2] + min(x_4, f(2)) = 228 + 100 = 328$
+        \item 3 minutos $\rightarrow OPT[4-3] + min(x_4, f(3)) = 109 + 100 = 209$
+        \item 4 minutos $\rightarrow OPT[4-4] + min(x_4, f(4)) = 0 + 100 = 100$
+        \item Nos quedamos con el valor máximo $\rightarrow OPT[4] = 900$     
+    \end{itemize}
+    \item minuto actual = 5 $\rightarrow$ Tenemos 5 opciones para el ataque anterior. Éste pudo suceder hace:
+    \begin{itemize}
+        \item 1 minuto $\rightarrow OPT[5-1] + min(x_5, f(1)) = 900 + 119 = 1019$
+        \item 2 minutos $\rightarrow OPT[5-2] + min(x_5, f(2)) = 800 + 300 = 1100$
+        \item 3 minutos $\rightarrow OPT[5-3] + min(x_5, f(3)) = 228 + 800 = 1028$
+        \item 4 minutos $\rightarrow OPT[5-4] + min(x_5, f(4)) = 109 + 877 = 986$
+        \item 5 minutos $\rightarrow OPT[5-5] + min(x_5, f(5)) = 0 + 877 = 877$
+        \item Nos quedamos con el valor máximo $\rightarrow OPT[5] = 1100$     
+    \end{itemize}
+\end{enumerate}
+Obtuvimos el siguiente arreglo de óptimos para cada minuto del combate:
+$$
+OPT = [0, 109, 228, 800, 900, 1100]
+$$
+Podemos concluir que la cantidad máxima de enemigos eliminados es 1100. Como se puede observar en el seguimiento realizado, exploramos para cada minuto la opción de haber atacado hace 1, \dots, j minutos. Para ello utilizamos las soluciones a subproblemas más pequeños. Nos quedamos con el valor que maximiza la ecuación de recurrencia. Éste es nuestro óptimo local para el minuto dado. Cuando llegamos a $i = n$ realizamos el mismo procedimiento, obteniendo el óptimo global para el algoritmo. De esta forma, exploramos todas las posibles combinaciones de $i \leq n$ y $j$.
+
+Para reconstruir la solución, tomamos el camino inverso. Empezamos con el minuto $n$ porque sabemos que al final siempre vamos a atacar. Variando el valor de $j$ desde 0 (haber atacado hace 1 minuto) hasta el minuto actual - 1 (ataque anterior hace $i$ minutos), nos fijamos cuál es el que permite obtener el óptimo dado. Como $j = 0$ no cumple significa que en el minuto $4$ la policía secreta recargó fuerzas. En cambio, en $n = 3$ se decidió atacar. Repetimos el procedimiento para ese minuto y concluimos que fue el primer ataque. Luego, la secuencia obtenida es: Cargar, Cargar, Atacar, Cargar, Atacar.
+
 \section{Ejemplos de ejecución}
-Se pueden encontrar en la carpeta \texttt{ejemplos\_adicionales} del \href{https://github.com/La-sociedad-del-silencio/TP2-Dinamica}{repositorio entregado} algunos ejemplos de posibles ejecuciones creadas para corroborar la optimalidad del algoritmo planteado.
+\label{sec:ejemplos}
+
+Se pueden encontrar en la carpeta \texttt{ejemplos\_adicionales} del \href{https://github.com/La-sociedad-del-silencio/TP2-Dinamica}{repositorio entregado} algunos ejemplos de posibles ejecuciones creadas para corroborar la optimalidad del algoritmo planteado. Los sets con pocos datos fueron generados a mano con el objetivo de verificar casos de prueba específicos. En cambio, con los tests de volumen usamos datos aleatorios generados con la biblioteca \href{https://docs.python.org/es/3/library/random.html}{random}, respetando que \texttt{f} sea monótona creciente.
 
 Además de los ejemplos brindados por la cátedra, se pensó en distintas perspectivas que podrían \textit{comprometer} de alguna manera la solución del algoritmo. Algunos aspectos evaluados fueron:
 
@@ -225,15 +284,10 @@ Los resultados de los ejemplos se podrán ejecutar en la terminal con los siguie
     \item \texttt{python3 codigo/main.py ejemplos\_adicionales/atacar\_al\_inicio.txt --mostrarSecuencia :} Si se quiere imprimir los resultados de un ejemplo particular mostrando además la secuencia de estrategias implementadas
 \end{itemize}
 
-\section{Análisis de optimalidad ante la variabilidad de $x_i$ y $f(j)$}
-Como mencionamos anteriormente, nuestra implementación hace una exploración implícita de todo el espacio de soluciones. Esto se ve reflejado tanto en el código como en la ecuación de recurrencia. Para buscar el par de valores que maximice la cantidad de enemigos derrotados, iteramos por todos los valores posibles de $f(j)$ dado un $x_i$.
-
-Esto implica que no hay valor de $x_i$ y $f(j)$ que no sea explorado por el algoritmo. Es decir, mientras que se cumplan las condiciones iniciales del problema (haya la misma cantidad de valores para $x_i$ y $f(j)$ y además que $f(j)$ sea monótona creciente), el algoritmo va a llegar a la solución optima.
-
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
 Para corroborar la complejidad algorítmica de nuestra implementación, realizamos una serie de tests de volumen. Éstos tienen en cuenta el algoritmo de programación dinámica, sin la optimización explicada en \nameref{sec:optimizacion}. A diferencia del \href{https://github.com/La-sociedad-del-silencio/TP1-Greedy}{TP1} y debido a la complejidad temporal del algoritmo, realizamos tests con una menor cantidad de casos.
-Para poder graficar y analizar el comportamiento de la implementación, realizamos dos corridas, una con alrededor de 3500 tests con un $n$ entre  1 y 10000; y otra con alrededor 500 tests 500 tests, con $n$ entre 0 y 5000. El código que usamos para generar los tests se encuentran en el archivo \texttt{codigo/grafico\_complejidad.py}. Empleamos la biblioteca random para generar valores aleatorios de $x$ y $f$.
+Para poder graficar y analizar el comportamiento de la implementación, realizamos dos corridas, una con alrededor de 3500 tests con un $n$ entre  1 y 10000; y otra con alrededor 500 tests 500 tests, con $n$ entre 0 y 5000. El código que usamos para generar los tests se encuentran en el archivo \texttt{codigo/grafico\_complejidad.py}. Empleamos la biblioteca \href{https://docs.python.org/es/3/library/random.html}{random} para generar valores aleatorios de $x$ y $f$.
 
 Observando los gráficos podemos entender mejor el comportamiento de nuestra implementación. 
 
