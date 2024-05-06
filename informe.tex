@@ -255,4 +255,10 @@ Para comparar con el gráfico anterior, calculamos el tiempo de ejecución exact
 
 Con esto concluimos que, a medida que aumenta el tamaño de entrada $n$ (cantidad de minutos), el tiempo de ejecución del algoritmo crece a un ritmo cuadrático. Esto coincide con el análisis de complejidad previamente presentado, indicando un costo proporcional a $n^2$.
 
+\section{Conclusión}
+
+A partir de un análisis detallado del problema planteado obtuvimos una ecuación de recurrencia que nos permite obtener la solución utilizando un algoritmo de programación dinánica. Como mencionamos previamente, esta solución es óptima. Para el caso particular de que los enemigos que llegan en cada minuto son menos que la cantidad de soldados que la policía puede combatir sin necesidad de recargar fuerzas, es posible realizar una optimización, pudiendo obtener el mismo resultado, pero en un tiempo lineal.
+
+Nuestra primera implementación del algoritmo consistía en una matriz de $n \times n$, teniendo en cuenta $i$ y $j$. Sin embargo, como $j \leq i$, había celdas que quedaban vacías o cuyo valor no nos importaba. Al resolver el \texttt{Problema\ del\ cambio} en clase, notamos similitudes con el problema actual y decidimos utilizar un enfoque similar. En lugar de utilizar una matriz, lo cual implica $O(n^2)$ de complejidad espacial, usamos un arreglo de óptimos para cada minuto $i$, que la reduce a $O(n)$. 
+
 \end{document}
