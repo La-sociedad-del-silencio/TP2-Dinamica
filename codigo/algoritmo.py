@@ -53,12 +53,12 @@ def eliminar_enemigos(n,x,f):
 
 def obtener_secuencia_estrategias(x, f, enemigos_eliminados, minuto_actual):
     """ 
-    Reconstruye la secuencia de estrategias usada para eliminar la mayor cantidad de
-    enemigos.
-    Empieza por el último minuto de combate sabiendo que la estrategia es 'atacar'. 
-    Comparando valores del arreglo de óptimos 'enemigos_eliminados', busca el minuto 
-    en el que se realizó el ataque anterior. Mientras que no lo encuentra, la estrategia
-    es 'cargar'. Repite hasta llegar al minuto 0.
+    Reconstruye la secuencia de estrategias usada para eliminar la mayor 
+    cantidad de enemigos.
+    Empieza por el último minuto de combate sabiendo que la estrategia es 
+    'atacar'. Comparando valores del arreglo de óptimos 'enemigos_eliminados', 
+    busca el minuto en el que se realizó el ataque anterior. Mientras que no 
+    lo encuentra, la estrategia es 'cargar'. Repite hasta llegar al minuto 0.
     """
     secuencia = []
     while minuto_actual > 0:
@@ -85,10 +85,11 @@ def obtener_secuencia_estrategias(x, f, enemigos_eliminados, minuto_actual):
 
 def es_secuencia_correcta(x, f, cantidad_enemigos, secuencia):
     """ 
-    Recibe un conjunto de datos 'x' y 'f', y el resultado obtenido al aplicar el algoritmo
-    de programación dinámica, 'cantidad_enemigos' y 'secuencia'.
-    Comprueba que siguiendo la secuencia de estrategias recibida, se puedan eliminar
-    'cantidad_enemigos'.
+    Recibe un conjunto de datos 'x' y 'f', y el resultado obtenido 
+    al aplicar el algoritmo de programación dinámica, 
+    'cantidad_enemigos' y 'secuencia'.
+    Comprueba que siguiendo la secuencia de estrategias recibida, 
+    se puedan eliminar 'cantidad_enemigos'.
     """
     minutos_desde_ultimo_ataque = 0
     tropas_eliminadas = 0

@@ -26,13 +26,6 @@
    \parfillskip=0pt \finalhyphendemerits=0 \par}%
 }
 
-% Esta funcion en realidad es una mentira. Emula ser una funcion de latex. La idea
-% es que el makefile que corre esto vea la funcion y la reemplace correctamente
-% 
-\newcommand{\funcionArchivo}[2]{%
-  {\textcolor{red}{WARNING: SI ESTAS VIENDO EN EL PDF SIGNIFICA QUE ALGO ANDUVO MAL. ASEGURATE DE COMPILAR EL LATEX CON EL MAKEFILE. GRACIAS :D}}
-  }%
-
 \begin{document}
 
 \begin{titlepage}
@@ -103,9 +96,9 @@ Sabiendo la duración en minutos del ataque ($n$), y los valores de $x_i$ y $f(j
 
 La resolución de un problema por medio de la programación dinámica implica reutilizar las soluciones a subproblemas más pequeños en subproblemas más grandes que los incluyan. En el contexto actual, el foco está puesto en maximizar la cantidad de enemigos eliminados dados $n$ minutos. Esta variable $n$ es crucial en el análisis del problema planteado puesto que si se tiene $k$ minutos, con $k < n$, necesariamente la cantidad de enemigos eliminados será menor o igual a la solución en el minuto $n$, siendo igual en el caso de que no lleguen más enemigos entre $k$ y $n$ minutos. De esta forma, la cantidad de minutos que tiene el ataque repercute en el resultado final del combate. Por ejemplo, si $n = 0$, se puede afirmar que la cantidad de enemigos eliminados será también 0. Entonces, nuestros subproblemas estarán dados por la cantidad máxima de enemigos que se pueden eliminar en cada minuto $i \leq n$.
 
-Sabiendo la forma de los subproblemas, debemos analizar cómo se componen para resolver subproblemas más grandes. Si queremos obtener la solución óptima en el minuto $i$, vamos a poder utilizar las soluciones parciales calculadas hasta entonces, pero no nos interesa si existen o no problemas más grandes. En cada minuto $i < n$ hay solamente dos estrategias posibles: atacar o cargar. \textbf{Atacar} implica enfrentarse con el enemigo, derrotando $f(j)$ soldados (con $j$ siendo la cantidad de minutos desde el ataque anterior) y perdiendo la energía acumulada. En cambio, definimos \textbf{cargar} como la acción de decidir no atacar y acumular más energía para un ataque futuro. 
+Sabiendo la forma de los subproblemas, debemos analizar cómo se componen para resolver subproblemas más grandes. Si queremos obtener la solución óptima en el minuto $i$, vamos a poder utilizar las soluciones parciales calculadas hasta entonces, pero no nos interesa si existen o no problemas más grandes. En cada minuto $i < n$ hay solamente dos estrategias posibles: atacar o cargar. \textbf{Atacar} implica enfrentarse con el enemigo, derrotando $min(x_i, f(j))$ soldados (con $j$ siendo la cantidad de minutos desde el ataque anterior) y perdiendo la energía acumulada. En cambio, definimos \textbf{cargar} como la acción de decidir no atacar y acumular más energía para un ataque futuro. 
 
-Sin embargo, en el caso del minuto $i = n$, ¿tiene sentido cargar sabiendo que no van a llegar más enemigos en el futuro? No. Ésto se debe a que la cantidad de maestros Fuego que se podrá eliminar en ese minuto será mayor o igual a 0, pero si cargamos energía, será definitivamente nula. Por lo tanto, en el último minuto conviene siempre atacar. Ahora bien, como establecimos antes, en el minuto $i \leq n$ no importa si $i = n$ o $i < n$, solamente debemos calcular el óptimo actual. En base al análisis previamente presentado, siempre va a ser mejor atacar a cargar, más allá de que en la solución final (problema mayor) se lleve a cabo la estrategia opuesta debido a que eso esté contemplado en el óptimo del minuto $n$. 
+Sin embargo, en el caso del minuto $i = n$, ¿tiene sentido cargar sabiendo que no van a llegar más enemigos en el futuro? No. Ésto se debe a que la cantidad de maestros Fuego que se podrá eliminar en ese minuto (no en total) será mayor o igual a 0, pero si cargamos energía, será definitivamente nula. Por lo tanto, en el último minuto conviene siempre atacar. Ahora bien, como establecimos antes, en el minuto $i \leq n$ no importa si $i = n$ o $i < n$, solamente debemos calcular el óptimo actual. En base al análisis previamente presentado, siempre va a ser mejor atacar a cargar, más allá de que en la solución final (problema mayor) se lleve a cabo la estrategia opuesta debido a que eso esté contemplado en el óptimo del minuto $n$. 
 
 Si en el minuto $i$ los Dai Li atacan, la cantidad de enemigos eliminados en ese instante será $min(f(j), x_i)$. El valor de $x_i$ es conocido, pero la energía acumulada ($f(j)$) por la policía secreta de la ciudad depende de los minutos que pasaron desde el último ataque. De esta manera, tenemos una segunda variable involucrada en el problema: $j$. Si el último ataque fue realizado hace un minuto, actualmente se podrá eliminar $min(f(1), x_i)$ soldados y la cantidad de enemigos eliminados acumulada será la suma entre este valor y el correspondiente en el ataque anterior. 
 
@@ -117,7 +110,7 @@ $$OPT[i] = max(min(f(j), x_i) + OPT[i - j] \forall j \in [1; i])$$
 
 Como caso base, tenemos que en el minuto 0 se eliminan 0 enemigos.
 
-Encontrada la ecuación de recurrencia, procedemos a aplicarla iterativamente de manera bottom up, construyendo las soluciones a los subproblemas de $i < n$ hasta llegar a la solución del problema original con $i = n$. Esta técnica es justamente programación dinámica. Empleamos \texttt{memoization} guardando los resultados calculados previamente en un arreglo. El procedimiento explicado nos permite realizar una exploración implícita del espacio de soluciones. La solución final será óptima porque en el minuto $n$ elegimos haber atacado hace $j$ minutos, donde $j$ maximiza la ecuación de recurrencia.
+Encontrada la ecuación de recurrencia, procedemos a aplicarla iterativamente de manera bottom up, construyendo las soluciones a los subproblemas de $i < n$ hasta llegar a la solución del problema original con $i = n$. En cada minuto utilizamos las soluciones a subproblemas menores. La técnica explicada es justamente programación dinámica. Empleamos \texttt{memoization} guardando los resultados calculados previamente en un arreglo. El procedimiento explicado nos permite realizar una exploración implícita del espacio de soluciones. La solución final será óptima porque en el minuto $n$ elegimos haber atacado hace $j$ minutos, donde $j$ maximiza la ecuación de recurrencia.
 
 Como conclusión, el uso de esta ecuación de recurrencia en nuestra implementación nos permite determinar la cantidad máxima de enemigos que se pueden atacar. En cada minuto calculamos el  máximo número de adversarios eliminados si se decide atacar en ese instante. Este valor está determinado por el tiempo entre éste y el ataque anterior. Al quedarnos con un $j$ que maximice la suma final de enemigos derrotados en el minuto $i$, nos aseguramos de obtener una solución óptima a ese subproblema. Luego, en el último minuto del combate, utilizaremos las soluciones a estos subproblemas de forma tal que tendremos en cuenta el ataque anterior que ocurrió en el minuto $k = n - j$, donde $OPT[k] + min(f(j), x_n)$ maximiza la cantidad de enemigos eliminados en total. A su vez, el $OPT[k]$ tiene lo mismo en consideración. 
 
@@ -129,23 +122,23 @@ Repetimos el procedimiento para $k$, hasta llegar al minuto 0.
 \subsection{Complejidad lectura de archivos}
 Antes de comenzar el algoritmo, tenemos que generar las listas de elementos sobre las cuales éste va a operar.
 Para esto tenemos la siguiente porción de código:
-\funcionArchivo{codigo/archivos.py generarTestDe}
+\inputminted[linenos, firstline=5, lastline=27]{python}{codigo/archivos.py}
 
 La función lee la línea que contiene la cantidad de valores que van a tener ambas listas. Una vez hecho eso, lee $n$ líneas para almacenar los distintos valores de $x_i$ y luego lee otras $n$ líneas para tener los valores de $f(j)$. Esto tiene una complejidad temporal $O(2\cdot n)$ que, despreciando la constante, resulta $O(n)$.
 
 \subsection{Complejidad algoritmo}
-\funcionArchivo{codigo/algoritmo.py eliminar_enemigos}
-El algoritmo empieza creando una lista de tamaño $n + 1$. Según la \docuPy, esto conlleva $\mathcal{O}(n)$ ya que se realiza $n$ veces una operación de tiempo constante $\mathcal{O}(1)$.
+\inputminted[linenos, firstline=25, lastline=52]{python}{codigo/algoritmo.py}
+El algoritmo empieza creando una lista de tamaño $n + 1$. Según la \docuPy, esto conlleva $\mathcal{O}(n)$ ya que se realiza $n$ veces (en realidad, $n + 1$, pero el 1 es una constante) una operación de tiempo constante $\mathcal{O}(1)$.
 
 Luego, en la línea \texttt{37} comienza un ciclo \texttt{for} que recorre todos los valores de $n$. En la línea \texttt{39} comienza un nuevo ciclo \texttt{for}, el cual va desde 0 hasta el minuto actual $i$. Esto significa que, en el peor de los casos, este ciclo va a iterar hasta $n$. Dentro del ciclo, todas las operaciones son $\mathcal{O}(1)$, es decir, constantes.
 
-Al tener dos ciclos anidados que realiza la cantidad de iteraciones mencionadas, podemos afirmar que la complejidad algorítmica de las líneas \texttt{37} a \texttt{47} es $\mathcal{O}(n^2)$.
+Al tener dos ciclos anidados que realizan la cantidad de iteraciones mencionadas, podemos afirmar que la complejidad algorítmica de las líneas \texttt{37} a \texttt{47} es $\mathcal{O}(n^2)$.
 
 Luego, en la línea \texttt{50} se ejecuta la función \texttt{obtener\_secuencia\_estrategias}, la cual analizamos en \nameref{sec:reconstruccion}. Sin embargo, podemos adelantar que su complejidad será también cuadrática.
 
 Finalmente, en la línea \texttt{51} se ejecuta el método \texttt{reverse()}, el cual tiene complejidad $\mathcal{O}(n)$
 
-Es decir, que el algoritmo de programación dinámica tiene una complejidad 
+Entonces, el algoritmo de programación dinámica tiene una complejidad 
 $$
 \mathcal{T}(n) = 2 \cdot \mathcal{O}(n^2) + \mathcal{O}(n) = \mathcal{O}(n^2)
 $$
@@ -154,7 +147,7 @@ $$
 \subsection{Complejidad reconstrucción de la solución}
 \label{sec:reconstruccion}
 
-\funcionArchivo{codigo/algoritmo.py obtener_secuencia_estrategias}
+\inputminted[linenos, firstline=54, lastline=84]{python}{codigo/algoritmo.py}
 La reconstrucción de la secuencia estratégica empieza desde el último minuto, hasta 0.
 Vemos que en la línea \texttt{64} tenemos un ciclo \texttt{while}, el cual tiene dentro un ciclo \texttt{for}.
 Dentro del \texttt{for} todas las operaciones son de complejidad $\mathcal{O}(1)$.
@@ -168,12 +161,10 @@ La complejidad obtenida es tenida en cuenta para el peor caso posible. Sin embar
 
 Este es el caso cuando todos los datos de $x_i$ son menores al resultado de $f[0]$ que se corresponde con un minuto de diferencia con el ataque anterior, es decir, $f(1)$. Esto se debe a que el resultado será predecible ya que se podría derrotar al 100\% de enemigos en todos los ataques sin necesidad de cargar fuerzas.
 
-La comprobación de si el conjunto de datos de entrada cumple esta condición es realizada antes de ejecutar el algoritmo propiamente dicho. Es decir, primero utilizamos la función \texttt{esOptimizable(n, x, f)}  que hace la verificación en tiempo lineal. Si efectivamente cumple el requisito, \texttt{eliminar\_enemigos\_optimizado(n, x)} resuelve el problema planteado en tiempo $O(n)$ sumando la totalidad de enemigos y estableciendo una secuencia en la que siempre se ataca. Si bien este algoritmo no es de programación dinámica, creemos que es fundamental tenerlo en cuenta especialmente con sets de datos muy grandes donde la complejidad lineal por sobre la cuadrática puede hacer una gran diferencia en el timepo de ejecución.
-Por el contrario, si no se puede optimizar, entonces ejecutamos nuestro algoritmo de programación dinámica. En este caso realizar la comprobación no afecta la complejidad resultante, sigue siendo $O(n^2)$.
+La comprobación de si el conjunto de datos de entrada cumple esta condición es realizada antes de ejecutar el algoritmo propiamente dicho. Es decir, primero utilizamos la función \texttt{esOptimizable(n,x,f)} que hace la verificación en tiempo lineal. Si efectivamente cumple el requisito, \texttt{eliminar\_enemigos\_optimizado(n, x)} resuelve el problema planteado en tiempo $O(n)$ sumando la totalidad de \\enemigos y estableciendo una secuencia en la que siempre se ataca. Si bien este algoritmo no es de programación dinámica, creemos que es fundamental tenerlo en cuenta especialmente con sets de datos muy grandes donde la complejidad lineal por sobre la cuadrática puede hacer una gran diferencia en el timepo de ejecución.
+Por el contrario, si no se puede optimizar, entonces ejecutamos \\nuestro algoritmo de programación dinámica. En este caso, realizar la comprobación no afecta la complejidad resultante, sigue siendo $O(n^2)$.
 
-\funcionArchivo{codigo/algoritmo.py esOptimizable}
-
-\funcionArchivo{codigo/algoritmo.py eliminar_enemigos_optimizado}
+\inputminted[linenos, firstline=4, lastline=23]{python}{codigo/algoritmo.py}
 
 \section{Análisis de optimalidad ante la variabilidad de $x_i$ y $f(j)$}
 \label{sec:optimalidad}
@@ -181,7 +172,9 @@ Para comprobar la optimalidad de nuestro algoritmo, realizamos múltiples prueba
 
 Como mencionamos anteriormente, nuestra implementación hace una exploración implícita de todo el espacio de soluciones. Esto se ve reflejado tanto en el código como en la ecuación de recurrencia. Para buscar el par de valores que maximice la cantidad de enemigos derrotados, iteramos por todos los valores posibles de $f(j)$ dado un $x_i$, teniendo en cuenta que $j \leq i$.
 
-Esto implica que no hay combinación de $x_i$ y $f(j)$ que no sea explorada por el algoritmo. Es decir, mientras que se cumplan las condiciones iniciales del problema (misma cantidad de valores para $x_i$ y $f(j)$), el algoritmo va a llegar a la solución óptima. Como pueden existir múltiples secuencias de estrategias que impliquen eliminar la cantidad máxima de enemigos, nuestro algoritmo solo devolverá una, dada por la función de reconstrucción de la solución.
+Esto implica que no hay combinación de $x_i$ y $f(j)$ que no sea explorada por el algoritmo. Es decir, mientras que se cumplan las condiciones iniciales del problema (misma cantidad de valores para $x_i$ y $f(j)$), el algoritmo va a llegar a la solución óptima. Como pueden existir múltiples secuencias de estrategias que impliquen eliminar la cantidad máxima de enemigos, nuestro algoritmo solo devolverá una, dada por la función de reconstrucción de la solución. La función \texttt{es\_secuencia\_correcta} nos permite validarla al ejecutar los tests.
+
+\inputminted[linenos, firstline=86, lastline=104]{python}{codigo/algoritmo.py}
 
 A continuación procedemos a explicar el comportamiento de nuestro algoritmo con un ejemplo sencillo. Dados los siguientes datos de entrada
 
@@ -229,9 +222,9 @@ Obtuvimos el siguiente arreglo de óptimos para cada minuto del combate:
 $$
 OPT = [0, 109, 228, 800, 900, 1100]
 $$
-Podemos concluir que la cantidad máxima de enemigos eliminados es 1100. Como se puede observar en el seguimiento realizado, exploramos para cada minuto la opción de haber atacado hace 1, \dots, j minutos. Para ello utilizamos las soluciones a subproblemas más pequeños. Nos quedamos con el valor que maximiza la ecuación de recurrencia. Éste es nuestro óptimo local para el minuto dado. Cuando llegamos a $i = n$ realizamos el mismo procedimiento, obteniendo el óptimo global para el algoritmo. De esta forma, exploramos todas las posibles combinaciones de $i \leq n$ y $j$.
+Podemos concluir que la cantidad máxima de enemigos eliminados es 1100. Como se puede observar en el seguimiento realizado, exploramos para cada minuto la opción de haber atacado hace 1, \dots, j minutos. Para ello utilizamos las soluciones a subproblemas más pequeños. Nos quedamos con el valor que maximiza la ecuación de recurrencia. Éste es nuestro óptimo local para el minuto dado. Cuando llegamos a $i = n$ realizamos el mismo procedimiento, obteniendo el óptimo global para el algoritmo. De esta forma, exploramos todas las posibles combinaciones de $i \leq n$ y $j$. Ésto nos permite obtener un resultado óptimo siempre, a pesar de variar los valores de $x_i$ y $f(j)$.
 
-Para reconstruir la solución, tomamos el camino inverso. Empezamos con el minuto $n$ porque sabemos que al final siempre vamos a atacar. Variando el valor de $j$ desde 0 (haber atacado hace 1 minuto) hasta el minuto actual - 1 (ataque anterior hace $i$ minutos), nos fijamos cuál es el que permite obtener el óptimo dado. Como $j = 0$ no cumple significa que en el minuto $4$ la policía secreta recargó fuerzas. En cambio, en $n = 3$ se decidió atacar. Repetimos el procedimiento para ese minuto y concluimos que fue el primer ataque. Luego, la secuencia obtenida es: Cargar, Cargar, Atacar, Cargar, Atacar.
+Para reconstruir la solución, tomamos el camino inverso. Empezamos con el minuto $n$ porque sabemos que al final siempre vamos a atacar. Variando el valor de $j$ desde 0 (haber atacado hace 1 minuto) hasta el minuto actual - 1 (ataque anterior hace $i$ minutos), nos fijamos cuál es el que permite obtener el óptimo dado. Como $j = 0$ no cumple, significa que en el minuto $4$ la policía secreta recargó fuerzas. En cambio, en $n = 3$ se decidió atacar. Repetimos el procedimiento para ese minuto y concluimos que fue el primer ataque. Luego, la secuencia obtenida es: Cargar, Cargar, Atacar, Cargar, Atacar.
 
 \section{Ejemplos de ejecución}
 \label{sec:ejemplos}
@@ -281,14 +274,14 @@ Los resultados de los ejemplos se podrán ejecutar en la terminal con los siguie
 
 \begin{itemize}
     \item \texttt{python3 codigo/main.py:} Imprime todos los resultados de ejemplos adicionales y ejemplos de cátedra con su valor obtenido y esperado, incluyendo el tiempo de ejecución
-    \item \texttt{python3 codigo/main.py ejemplos\_adicionales/atacar\_al\_inicio.txt :} Si se quiere imprimir los resultados de un ejemplo particular
-    \item \texttt{python3 codigo/main.py ejemplos\_adicionales/atacar\_al\_inicio.txt --mostrarSecuencia :} Si se quiere imprimir los resultados de un ejemplo particular mostrando además la secuencia de estrategias implementadas
+    \item \texttt{python3 codigo/main.py ejemplos\_adicionales/atacar\_al\_inicio.txt:} Si se quiere imprimir los resultados de un ejemplo particular
+    \item \texttt{python3 codigo/main.py ejemplos\_adicionales/atacar\_al\_inicio.txt --mostrarSecuencia:} Si se quiere imprimir los resultados de un ejemplo particular mostrando además la secuencia de estrategias implementadas
 \end{itemize}
 
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
 Para corroborar la complejidad algorítmica de nuestra implementación, realizamos una serie de tests de volumen. Éstos tienen en cuenta el algoritmo de programación dinámica, sin la optimización explicada en \nameref{sec:optimizacion}. A diferencia del \href{https://github.com/La-sociedad-del-silencio/TP1-Greedy}{TP1} y debido a la complejidad temporal del algoritmo, realizamos tests con una menor cantidad de casos.
-Para poder graficar y analizar el comportamiento de la implementación, realizamos dos corridas, una con alrededor de 3500 tests con un $n$ entre  1 y 10000; y otra con alrededor 500 tests 500 tests, con $n$ entre 0 y 5000. El código que usamos para generar los tests se encuentran en el archivo \texttt{codigo/grafico\_complejidad.py}. Empleamos la biblioteca \href{https://docs.python.org/es/3/library/random.html}{random} para generar valores aleatorios de $x$ y $f$.
+Para poder graficar y analizar el comportamiento de la implementación, realizamos dos \\corridas, una con alrededor de 3500 tests con un $n$ entre  1 y 10000; y otra con alrededor 500 tests, con $n$ entre 0 y 5000. El código que usamos para generar los tests se encuentra en el archivo \texttt{codigo/grafico\_complejidad.py}. Empleamos la biblioteca \href{https://docs.python.org/es/3/library/random.html}{random} para generar valores aleatorios de $x$ y $f$.
 
 Observando los gráficos podemos entender mejor el comportamiento de nuestra implementación. 
 
@@ -314,7 +307,7 @@ Con esto concluimos que, a medida que aumenta el tamaño de entrada $n$ (cantida
 
 A partir de un análisis detallado del problema planteado obtuvimos una ecuación de recurrencia que nos permite obtener la solución utilizando un algoritmo de programación dinámica. Como mencionamos previamente, esta solución es óptima. 
 
-Para el caso particular en que los enemigos atacantes son siempre menos que la capacidad de combate de la policía (sin necesidad de recargar fuerzas), realizamos una optimización que mejora la complejidad temporal a la hora de hallar la cantidad máxima de enemigos derrotados. Este caso fue descubierto gracias a las pruebas de ejecución implementadas. Como hemos mencionado, si bien esa optimización no respeta la definición de programación dinámica, se decidió agregar porque no afecta en sí el concepto principal del algoritmo ni tampoco la complejidad global. Se trata de una excepción que representa un caso ideal, y no el peor caso.
+Para el caso particular en que los enemigos atacantes son siempre menos que la capacidad de combate de la policía (sin necesidad de recargar fuerzas), realizamos una optimización que mejora la complejidad temporal a la hora de hallar la cantidad máxima de enemigos derrotados. Este caso fue descubierto gracias a las pruebas de ejecución implementadas. Como hemos mencionado, si bien esa optimización no respeta la definición de programación dinámica, se decidió agregar porque no afecta en sí el concepto principal del algoritmo ni tampoco a la complejidad global. Se trata de una excepción que representa un caso ideal, y no el peor caso.
 
 Por otro lado, quisiéramos mencionar que en un comienzo nuestra primera implementación del algoritmo consistió en una matriz de $n \times n$, conteniendo todas las combinaciones posibles de $i$ y $j$ (con $i$ siendo el minuto actual y $j$ el tiempo transcurrido desde el último ataque). Sin embargo, como $j \leq i$, había celdas que quedaban vacías o cuyo valor no nos interesaba. Fue entonces cuando observamos una similitud del problema actual y el \texttt{Problema\ del\ cambio} visto en clase y decidimos utilizar un enfoque similar. En lugar de usar una matriz, lo cual implicaba $O(n^2)$ de complejidad espacial en memoria, utilizamos un arreglo de óptimos para cada minuto $i$, que la reduce a $O(n)$. Como pudimos demostrar en la sección \nameref{sec:optimalidad}, solo precisamos almacenar un arreglo de óptimos minuto a minuto. 
 \end{document}
