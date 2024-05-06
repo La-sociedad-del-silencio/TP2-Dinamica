@@ -64,3 +64,4 @@ python3 codigo/main.py ruta_a_archivo --mostrarSecuencia
 ![foto](./informe-imagenes/informe-12.png)
 ![foto](./informe-imagenes/informe-13.png)
 ![foto](./informe-imagenes/informe-14.png)
+
