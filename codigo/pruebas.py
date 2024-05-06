@@ -24,7 +24,7 @@ class Resultado:
         representacion += "\n"
         representacion += "Tiempo total: " + str(self.tiempo) + " milisegundos"
         representacion += "\n"
-        representacion += "Cantidad de tropas:\n" 
+        representacion += "Cantidad de tropas eliminadas:\n" 
         representacion += "\tResultado esperado: " + str(self.esperado[0])
         representacion += "\n"
         representacion += "\tResultado obtenido: " + str(self.obtenido[0])

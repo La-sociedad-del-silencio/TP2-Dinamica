@@ -51,7 +51,7 @@ def procesar_archivo(argv):
     if len(argv) > 2 and argv[2] == FLAGMOSTRARSECUENCIA:
         ataqueIndice = 1
         for estrategia in secuencia:
-            print(f"Decisión tomada en el ataque enemigo número {ataqueIndice}: {estrategia}")
+            print(f"Decisión tomada en el minuto {ataqueIndice}: {estrategia}")
             ataqueIndice += 1 
     print(f"La cantidad de enemigos derrotados fue: {cantidad_enemigos}")
     print(f"Tiempo total: {tiempoQueLlevo} mili segundos")    
