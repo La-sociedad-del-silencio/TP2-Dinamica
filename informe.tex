@@ -176,6 +176,7 @@ Por el contrario, si no se puede optimizar, entonces ejecutamos nuestro algoritm
 \funcionArchivo{codigo/algoritmo.py eliminar_enemigos_optimizado}
 
 \section{Análisis de optimalidad ante la variabilidad de $x_i$ y $f(j)$}
+\label{sec:optimalidad}
 Para comprobar la optimalidad de nuestro algoritmo, realizamos múltiples pruebas variando los valores de $x_i$ y $f(j)$. En \nameref{sec:ejemplos} se encuentra la explicación detallada de los casos de prueba. En general usamos $n = 5$ para poder calcular de antemano el resultado óptimo esperado y posteriormente compararlo con el obtenido por nuestro algoritmo. En cada caso ambos resultados coincidieron.
 
 Como mencionamos anteriormente, nuestra implementación hace una exploración implícita de todo el espacio de soluciones. Esto se ve reflejado tanto en el código como en la ecuación de recurrencia. Para buscar el par de valores que maximice la cantidad de enemigos derrotados, iteramos por todos los valores posibles de $f(j)$ dado un $x_i$, teniendo en cuenta que $j \leq i$.
