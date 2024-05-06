@@ -3,6 +3,9 @@ from algoritmo import eliminar_enemigos, esOptimizable, eliminar_enemigos_optimi
 FLAGMOSTRARSECUENCIA = "--mostrarSecuencia"
 
 def generarTestDe(archivo):
+    """ 
+    Recibe un archivo, lo abre, lee y devuelve los datos 'n', 'x' y 'f'.
+    """
     x = []
     f = []
     with open(archivo, "r") as file:
@@ -24,6 +27,13 @@ def generarTestDe(archivo):
     return n, x, f 
 
 def procesar_archivo(argv):
+    """ 
+    Dado el primer argumento pasado por línea de comandos, procesa los datos
+    del archivo correspondiente y calcula la cantidad máxima de enemigos eliminados
+    y la secuencia de estrategias utilizada. Si se usa el flag --mostrarSecuencia, 
+    imprime las estrategias. Caso contrario, solo muestra el tiempo de 
+    ejecución y la cantidad de enemigos derrotados.
+    """
 
     archivoAProcesar = argv[1]
     

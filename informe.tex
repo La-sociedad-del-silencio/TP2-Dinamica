@@ -137,13 +137,13 @@ La función lee la línea que contiene la cantidad de valores que van a tener am
 \funcionArchivo{codigo/algoritmo.py eliminar_enemigos}
 El algoritmo empieza creando una lista de tamaño $n + 1$. Según la \docuPy, esto conlleva $\mathcal{O}(n)$ ya que se realiza $n$ veces una operación de tiempo constante $\mathcal{O}(1)$.
 
-Luego, en la línea \texttt{7} comienza un ciclo \texttt{for} que recorre todos los valores de $n$. En la línea \texttt{9} comienza un nuevo ciclo \texttt{for}, el cual va desde 0 hasta el minuto actual $i$. Esto significa que, en el peor de los casos, este ciclo va a iterar hasta $n$. Dentro del ciclo, todas las operaciones son $\mathcal{O}(1)$, es decir, constantes.
+Luego, en la línea \texttt{37} comienza un ciclo \texttt{for} que recorre todos los valores de $n$. En la línea \texttt{39} comienza un nuevo ciclo \texttt{for}, el cual va desde 0 hasta el minuto actual $i$. Esto significa que, en el peor de los casos, este ciclo va a iterar hasta $n$. Dentro del ciclo, todas las operaciones son $\mathcal{O}(1)$, es decir, constantes.
 
-Al tener dos ciclos anidados que realiza la cantidad de iteraciones mencionadas, podemos afirmar que la complejidad algorítmica de las líneas \texttt{7} a \texttt{17} es $\mathcal{O}(n^2)$.
+Al tener dos ciclos anidados que realiza la cantidad de iteraciones mencionadas, podemos afirmar que la complejidad algorítmica de las líneas \texttt{37} a \texttt{47} es $\mathcal{O}(n^2)$.
 
-Luego, en la línea \texttt{20} se ejecuta la función \texttt{obtener\_secuencia\_estrategias}, la cual analizamos en \nameref{sec:reconstruccion}. Sin embargo, podemos adelantar que su complejidad será también cuadrática.
+Luego, en la línea \texttt{50} se ejecuta la función \texttt{obtener\_secuencia\_estrategias}, la cual analizamos en \nameref{sec:reconstruccion}. Sin embargo, podemos adelantar que su complejidad será también cuadrática.
 
-Finalmente, en la línea \texttt{21} se ejecuta el método \texttt{reverse()}, el cual tiene complejidad $\mathcal{O}(n)$
+Finalmente, en la línea \texttt{51} se ejecuta el método \texttt{reverse()}, el cual tiene complejidad $\mathcal{O}(n)$
 
 Es decir, que el algoritmo de programación dinámica tiene una complejidad 
 $$
@@ -156,7 +156,7 @@ $$
 
 \funcionArchivo{codigo/algoritmo.py obtener_secuencia_estrategias}
 La reconstrucción de la secuencia estratégica empieza desde el último minuto, hasta 0.
-Vemos que en la línea \texttt{26} tenemos un ciclo \texttt{while}, el cual tiene dentro un ciclo \texttt{for}.
+Vemos que en la línea \texttt{64} tenemos un ciclo \texttt{while}, el cual tiene dentro un ciclo \texttt{for}.
 Dentro del \texttt{for} todas las operaciones son de complejidad $\mathcal{O}(1)$.
 
 En el peor de los casos, podemos pensar a estos dos ciclos como dos ciclos anidados que iteran desde 0 hasta $\texttt{n}$. Por esto, decimos que la reconstrucción va a tener una complejidad de $\mathcal{O}(n^2)$.

@@ -14,14 +14,16 @@ def main():
                     imprime las estrategias utilizadas 
     OUTPUT (stdout):
         - Cantidad de enemigos eliminados
-        - El tiempo que llevo calcular todo
+        - El tiempo que llevó calcular todo
         - Opcional: estrategias
     '''
     
     if len(argv) > 1:
-        procesar_archivo(argv) # To-Do  
+        procesar_archivo(argv) 
         
     else:
+        # TESTS / EJEMPLOS
+        
         print("---Ejemplos de la cátedra---\n")
         for resultado in generarResultados("ejemplos_catedra"):
             print(resultado)

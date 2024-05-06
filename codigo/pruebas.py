@@ -79,7 +79,7 @@ def generarRtasEsperadas(archivo):
 def generarResultados(carpeta):
     """ 
     Dado un directorio con ejemplos y las respuestas esperadas, ejecuta
-    el programa en cada uno de ellos y devuelve una lista con los resultados.
+    el programa en cada uno de ellos y devuelve una lista con los resultados
     obtenidos.
     """
     archivo_rtas_esperadas = f"{carpeta}/Resultados_Esperados.txt"
@@ -97,7 +97,3 @@ def generarResultados(carpeta):
         resultados.append(str(resultado))
 
     return resultados
-
-            
-
-

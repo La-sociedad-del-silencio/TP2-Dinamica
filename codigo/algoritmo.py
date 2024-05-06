@@ -2,18 +2,36 @@ CARGAR = "Cargar"
 ATACAR = "Atacar"
 
 def esOptimizable(n, x, f):
+    """ 
+    Indica si, dado el conjunto de datos de entrada, se puede 
+    utilizar la versión optimizada del algoritmo.
+    Se debe cumplir que cada x_i sea menor que f[0] = f(1)
+    """
     for minuto_actual in range(n):
         if x[minuto_actual] > f[0]:
             return False
     return True
 
 def eliminar_enemigos_optimizado(n, x):
+    """ 
+    Devuelve el resultado del algoritmo si el mismo esOptimizable().
+    Se eliminan todos los enemigos y se ataca en cada minuto.
+    """
     enemigos_eliminados = x
     max_enemigos = sum(enemigos_eliminados)
     secuencia = [ATACAR] * n
     return (max_enemigos,secuencia)
 
 def eliminar_enemigos(n,x,f):
+    """ 
+    Algoritmo de programación dinámica para determinar la cantidad máxima de
+    enemigos que pueden ser derrotados. Utiliza obtener_secuencia_estrategias()
+    para reconstruir las estrategias de ataque empleadas.
+    
+    Recibe: n >= 0 y las listas x y f, cuyo tamaño es n. f toma valores
+    monótonos crecientes.
+    Devuelve: cantidad de enemigos eliminados y secuencia de estrategias
+    """
     enemigos_eliminados = [0] * (n + 1)
     
     for minuto_actual in range(1, n + 1):
@@ -34,6 +52,14 @@ def eliminar_enemigos(n,x,f):
     return (max_enemigos, secuencia)
 
 def obtener_secuencia_estrategias(x, f, enemigos_eliminados, minuto_actual):
+    """ 
+    Reconstruye la secuencia de estrategias usada para eliminar la mayor cantidad de
+    enemigos.
+    Empieza por el último minuto de combate sabiendo que la estrategia es 'atacar'. 
+    Comparando valores del arreglo de óptimos 'enemigos_eliminados', busca el minuto 
+    en el que se realizó el ataque anterior. Mientras que no lo encuentra, la estrategia
+    es 'cargar'. Repite hasta llegar al minuto 0.
+    """
     secuencia = []
     while minuto_actual > 0:
         
@@ -58,11 +84,17 @@ def obtener_secuencia_estrategias(x, f, enemigos_eliminados, minuto_actual):
     return secuencia
 
 def es_secuencia_correcta(x, f, cantidad_enemigos, secuencia):
+    """ 
+    Recibe un conjunto de datos 'x' y 'f', y el resultado obtenido al aplicar el algoritmo
+    de programación dinámica, 'cantidad_enemigos' y 'secuencia'.
+    Comprueba que siguiendo la secuencia de estrategias recibida, se puedan eliminar
+    'cantidad_enemigos'.
+    """
     minutos_desde_ultimo_ataque = 0
     tropas_eliminadas = 0
     for minuto_actual, estrategia in enumerate(secuencia):
         
-        if estrategia == 'Atacar':
+        if estrategia == ATACAR:
            
             tropas_eliminadas += min(x[minuto_actual], f[minutos_desde_ultimo_ataque])
             minutos_desde_ultimo_ataque = 0

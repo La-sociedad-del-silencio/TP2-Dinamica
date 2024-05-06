@@ -6,6 +6,10 @@ from algoritmo import eliminar_enemigos
 import matplotlib.pyplot as plt
 
 def generarAtaques(n: int):
+    """ 
+    Genera un test de tamaño n, con datos aleatorios.
+    """
+    
     rafagas = [] 
     cargaAtaque = []
     for _ in range(n):
@@ -14,14 +18,16 @@ def generarAtaques(n: int):
         f_j = randint(1, 1000) if len(cargaAtaque) == 0 else randint(cargaAtaque[-1]+1, cargaAtaque[-1]+100)
         cargaAtaque.append(f_j)
 
-    cargaAtaque.sort()
-
     secuencia = (n, rafagas, cargaAtaque)
 
     return secuencia
 
         
 def correrTest(cantidad):
+    """ 
+    Ejecuta un test de tamaño 'cantidad' y devuelve el tiempo de 
+    ejecución en milisegundos.
+    """
     n, x, f = generarAtaques(cantidad)
     inicio = time.time()
     # A priori solo nos interesa el tiempo en esta seccion 
@@ -45,8 +51,13 @@ def generarEjemplos(cantidadElementos):
 
     return milisegs
     
-# Ejecutar si se quiere generar un nuevo conjunto de mediciones
-def generarGraficoPrimeraVez():
+def generarGraficoPrimeraVez():  
+    """ 
+    Ejecuta tests de volumen y genera un gráfico con los resultados.
+    Guarda los resultados en un archivo.
+    
+    Utilizar si se quiere generar un nuevo conjunto de mediciones
+    """
     # Arrancamos con la misma cantidad que la catedra: 5000
     cantidadElementos = []
     maxNum = 5000
@@ -64,9 +75,15 @@ def generarGraficoPrimeraVez():
 
 #generarGraficoPrimeraVez()
 
-# Una vez que se tengan las mediciones, pero se quiera hacer cambios al gráfico,
-# ejecutar ésta así ahorramos tiempo.
 def generarGrafico():
+    
+    """ 
+    Lee de un archivo los resultados de los tests de volumen realizados.
+    Genera un gráfico y lo guarda.
+    
+    Se utiliza cuando se tienen las mediciones, pero se quiere hacer cambios al
+    gráfico.
+    """
     cantidadElementos = None
     milisegs = None
     
@@ -87,6 +104,10 @@ def generarGrafico():
     generarGraficoAuxiliar(cantidadElementos, milisegs, True)
    
 def generarGraficoAuxiliar(cantidadElementos, milisegs, agregarTicks): 
+    """ 
+    Genera un gráfico que compara la cantidad de minutos de combate con el
+    tiempo de ejecución del algoritmo en cada caso.
+    """
     plt.plot(cantidadElementos, milisegs, 'o', color='red')
 
     plt.ylabel('Tiempo en mili-segundos')

@@ -1,6 +1,10 @@
 from random import randint
 
 def generar_ejemplo_x_menor_a_f0_volumen(n):
+    """ 
+    Genera un test de volumen para el caso de que cada x_i es menor que f[0]
+    """
+    
     x = []
     f = []
     
@@ -14,6 +18,11 @@ def generar_ejemplo_x_menor_a_f0_volumen(n):
     return x, f
 
 def escribir_ejemplo_en_archivo():
+    """ 
+    Genera un test de volumen para el caso de que cada x_i es menor que f[0],
+    guarda los datos en un archivo y coloca el resultado esperado en 
+    ejemplos_adicionales/Resultados_Esperados.txt.
+    """
     
     x, f =  generar_ejemplo_x_menor_a_f0_volumen(100)
     with open("ejemplos_adicionales/x_menor_a_f0_volumen.txt", "w") as file:
