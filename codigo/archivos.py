@@ -54,5 +54,5 @@ def procesar_archivo(argv):
             print(f"Decisión tomada en el minuto {ataqueIndice}: {estrategia}")
             ataqueIndice += 1 
     print(f"La cantidad de enemigos derrotados fue: {cantidad_enemigos}")
-    print(f"Tiempo total: {tiempoQueLlevo} mili segundos")    
+    print(f"Tiempo total: {tiempoQueLlevo} mili-segundos")    
         
